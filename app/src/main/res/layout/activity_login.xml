@@ -16,45 +16,77 @@
         android:textStyle="bold"
         android:layout_margin="50dp"
         android:gravity="center"
+        android:fontFamily="@font/nunito_bold"
         />
-    <EditText
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout1"
+        style="@style/LoginTextInputLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/username"
-        android:layout_below="@+id/singIn"
-        android:hint="Username"
-        android:textColor="@color/white"
+        android:layout_below="@id/singIn"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:hint="Email"
         android:textColorHint="@color/white"
-        android:layout_margin="10dp"
-        android:padding="20dp"
-        android:background="#30ffffff"
-        android:drawableLeft="@drawable/baseline_person_24"
-        android:drawablePadding="20dp"/>
-    <EditText
+
+        app:boxBackgroundColor="@color/mycolor"
+        app:boxBackgroundMode="outline"
+        app:startIconDrawable="@drawable/baseline_person_24"
+        app:startIconTint="@color/white">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/nunito"
+            android:inputType="text"
+            android:textColor="@color/white">
+
+        </com.google.android.material.textfield.TextInputEditText>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/password"
-        android:layout_below="@+id/username"
+        android:layout_margin="10dp"
+        android:layout_below="@id/textInputLayout1"
+        app:startIconDrawable="@drawable/baseline_key_24"
+        app:endIconMode="password_toggle"
+        app:endIconTint="@color/white"
+        app:startIconTint="@color/white"
+        app:boxBackgroundMode="outline"
+        app:boxBackgroundColor="@color/mycolor"
         android:hint="Password"
-        android:textColor="@color/white"
         android:textColorHint="@color/white"
-        android:layout_margin="10dp"
-        android:padding="20dp"
-        android:background="#30ffffff"
-        android:drawableLeft="@drawable/baseline_key_24"
-        android:drawablePadding="20dp"/>
+        android:id="@+id/textInputLayout2"
+        style="@style/LoginTextInputLayoutStyle">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/white"
+            android:fontFamily="@font/nunito"
+            android:inputType="textPassword">
+
+        </com.google.android.material.textfield.TextInputEditText>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/loginBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/password"
+        android:layout_below="@id/textInputLayout2"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         android:backgroundTint="@color/design_default_color_secondary"
+        android:fontFamily="@font/nunito_semibold"
         android:text="Login" />
     <LinearLayout
         android:layout_width="match_parent"
@@ -69,7 +101,7 @@
             android:text="Forgot password ?"
             android:textSize="18dp"
             android:textColor="@color/white"
-
+            android:fontFamily="@font/nunito_semibold"
             android:layout_margin="20dp"/>
         />
 
@@ -81,7 +113,7 @@
             android:text="Create new account"
             android:textSize="18dp"
             android:textColor="@color/white"
-
+            android:fontFamily="@font/nunito_semibold"
             android:layout_margin="20dp"/>
     </LinearLayout>
 
@@ -94,6 +126,7 @@
         android:textColor="@color/black"
         android:text="or sign in with"
         android:textSize="18dp"
+        android:fontFamily="@font/nunito_semibold"
         android:layout_centerHorizontal="true"/>
     <LinearLayout
         android:layout_width="match_parent"
