@@ -13,15 +13,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.healthcare.databinding.ActivityRegisterBinding;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -33,7 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     final String passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
 
-
+DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://healthcare-fd9a3-default-rtdb.firebaseio.com/");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -210,19 +209,39 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
 
-binding.registerBtn.setOnClickListener(view1 -> mAuth.createUserWithEmailAndPassword(binding.email.getText().toString().trim(), binding.password.getText().toString().trim()).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
-    @Override
-    public void onComplete(@NonNull Task<AuthResult> task) {
-        Log.e("test",binding.email.getText().toString().trim());
-        Log.e("test",binding.password.getText().toString().trim());
-        Toast.makeText(RegisterActivity.this, "createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
-        if (!task.isSuccessful()) {
-            Toast.makeText(RegisterActivity.this, "Authentication failed." + task.getException(),
-                    Toast.LENGTH_SHORT).show();
-        } else {
-            startActivity(new Intent(RegisterActivity.this, MainActivity.class));
-            finish();
-        }
+binding.registerBtn.setOnClickListener(view1 -> mAuth.createUserWithEmailAndPassword(binding.email.getText().toString().trim(), binding.password.getText().toString().trim()).addOnCompleteListener(RegisterActivity.this, task -> {
+  if (task.isSuccessful()){
+      String email = binding.email.getText().toString().trim();
+      String password = binding.password.getText().toString().trim();
+      String fullname = binding.fullname.getText().toString().trim();
+      String phoneNumber =  binding.phoneNumber.getText().toString().trim();
+      User user= new User(fullname, email, password, phoneNumber);
+      databaseReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user).addOnCompleteListener(task1 -> {
+          if (task1.isSuccessful()){
+              Toast.makeText(this, "Registration success", Toast.LENGTH_LONG).show();
+          } else {
+              Toast.makeText(RegisterActivity.this, "Registration failed." + task.getException(),
+                      Toast.LENGTH_SHORT).show();
+          }
+      });
+
+      Log.e("test",binding.email.getText().toString().trim());
+      Log.e("test",binding.password.getText().toString().trim());
+      FirebaseUser firebaseUser = mAuth.getCurrentUser();
+      firebaseUser.sendEmailVerification();
+
+      Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+      intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+      startActivity(intent);
+      finish();
+      Toast.makeText(RegisterActivity.this, "createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
+  }
+    if (!task.isSuccessful()) {
+        Toast.makeText(RegisterActivity.this, "Register failed." + task.getException(),
+                Toast.LENGTH_SHORT).show();
+    } else {
+        startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+        finish();
     }
 }));
 
