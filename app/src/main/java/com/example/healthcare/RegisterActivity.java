@@ -13,10 +13,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.healthcare.databinding.ActivityRegisterBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -28,11 +31,12 @@ import java.util.regex.Pattern;
 public class RegisterActivity extends AppCompatActivity {
     private ActivityRegisterBinding binding;
     private FirebaseAuth mAuth;
-   final  String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+    final String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
 
     final String passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
 
-DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://healthcare-fd9a3-default-rtdb.firebaseio.com/");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +45,8 @@ DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenc
         View view = binding.getRoot();
         setContentView(view);
         final String[] pw = {null};
-
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("Users");
         mAuth = FirebaseAuth.getInstance();
         binding.email.addTextChangedListener(new TextWatcher() {
             @Override
@@ -53,34 +58,33 @@ DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenc
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String usernameInput = charSequence.toString();
                 //if (usernameInput.length()>=8){
-                    Pattern pattern = Pattern.compile(emailRegex);
-                    Matcher matcher =pattern.matcher(usernameInput);
-                    boolean usernameMatch = matcher.find();
-                    if (usernameMatch)
-                    {
-                        binding.textInputLayout1.setHelperTextEnabled(true);
-                        Drawable tickIcon = getResources().getDrawable(R.drawable.baseline_check_circle_24);
-                        tickIcon.setBounds(0, 0, tickIcon.getIntrinsicWidth(), tickIcon.getIntrinsicHeight());
-                        ImageSpan tickSpan = new ImageSpan(tickIcon, ImageSpan.ALIGN_BOTTOM);
-                        SpannableString spannableString = new SpannableString("  Valid email");
-                        spannableString.setSpan(tickSpan, 0, 1, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-                        binding.textInputLayout1.setHelperText(spannableString);
-                        binding.textInputLayout1.setError("");
-                        binding.textInputLayout1.setHelperTextColor(ColorStateList.valueOf(ContextCompat.getColor(RegisterActivity.this, R.color.tickColor)));
+                Pattern pattern = Pattern.compile(emailRegex);
+                Matcher matcher = pattern.matcher(usernameInput);
+                boolean usernameMatch = matcher.find();
+                if (usernameMatch) {
+                    binding.textInputLayout1.setHelperTextEnabled(true);
+                    Drawable tickIcon = getResources().getDrawable(R.drawable.baseline_check_circle_24);
+                    tickIcon.setBounds(0, 0, tickIcon.getIntrinsicWidth(), tickIcon.getIntrinsicHeight());
+                    ImageSpan tickSpan = new ImageSpan(tickIcon, ImageSpan.ALIGN_BOTTOM);
+                    SpannableString spannableString = new SpannableString("  Valid email");
+                    spannableString.setSpan(tickSpan, 0, 1, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+                    binding.textInputLayout1.setHelperText(spannableString);
+                    binding.textInputLayout1.setError("");
+                    binding.textInputLayout1.setHelperTextColor(ColorStateList.valueOf(ContextCompat.getColor(RegisterActivity.this, R.color.tickColor)));
 
-                    }else{
+                } else {
 
-                        binding.textInputLayout1.setHelperTextEnabled(true);
-                        Drawable tickIcon = getResources().getDrawable(R.drawable.baseline_error_24);
-                        tickIcon.setBounds(0, 0, tickIcon.getIntrinsicWidth(), tickIcon.getIntrinsicHeight());
-                        ImageSpan tickSpan = new ImageSpan(tickIcon, ImageSpan.ALIGN_BOTTOM);
-                        SpannableString spannableString = new SpannableString("  Please enter a valid email");
-                        spannableString.setSpan(tickSpan, 0, 1, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-                        binding.textInputLayout1.setError(spannableString);
-                        binding.textInputLayout1.setErrorTextColor(ColorStateList.valueOf(ContextCompat.getColor(RegisterActivity.this, R.color.errorColor)));
+                    binding.textInputLayout1.setHelperTextEnabled(true);
+                    Drawable tickIcon = getResources().getDrawable(R.drawable.baseline_error_24);
+                    tickIcon.setBounds(0, 0, tickIcon.getIntrinsicWidth(), tickIcon.getIntrinsicHeight());
+                    ImageSpan tickSpan = new ImageSpan(tickIcon, ImageSpan.ALIGN_BOTTOM);
+                    SpannableString spannableString = new SpannableString("  Please enter a valid email");
+                    spannableString.setSpan(tickSpan, 0, 1, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+                    binding.textInputLayout1.setError(spannableString);
+                    binding.textInputLayout1.setErrorTextColor(ColorStateList.valueOf(ContextCompat.getColor(RegisterActivity.this, R.color.errorColor)));
 
 
-                    }
+                }
                 //}
 //                else {
 //                    binding.textInputLayout1.setError("Email not valid");
@@ -105,12 +109,11 @@ DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenc
                 String passwordInput = charSequence.toString();
 
                 pw[0] = charSequence.toString();
-                if (passwordInput.length()>=8){
+                if (passwordInput.length() >= 8) {
                     Pattern pattern = Pattern.compile(passwordRegex);
-                    Matcher matcher =pattern.matcher(passwordInput);
+                    Matcher matcher = pattern.matcher(passwordInput);
                     boolean passwordMatch = matcher.find();
-                    if (passwordMatch)
-                    {
+                    if (passwordMatch) {
                         binding.textInputLayout2.setHelperTextEnabled(true);
                         Drawable tickIcon = getResources().getDrawable(R.drawable.baseline_check_circle_24);
                         tickIcon.setBounds(0, 0, tickIcon.getIntrinsicWidth(), tickIcon.getIntrinsicHeight());
@@ -120,7 +123,7 @@ DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenc
                         binding.textInputLayout2.setHelperText(spannableString);
                         binding.textInputLayout2.setError("");
                         binding.textInputLayout2.setHelperTextColor(ColorStateList.valueOf(ContextCompat.getColor(RegisterActivity.this, R.color.tickColor)));
-                    }else{
+                    } else {
                         binding.textInputLayout2.setHelperTextEnabled(true);
                         Drawable tickIcon = getResources().getDrawable(R.drawable.baseline_error_24);
                         tickIcon.setBounds(0, 0, tickIcon.getIntrinsicWidth(), tickIcon.getIntrinsicHeight());
@@ -132,7 +135,7 @@ DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenc
 
 //                        binding.textInputLayout2.setError("Password must be at least 8 characters long,at least one uppercase and lower letter and one digit and special character.");
                     }
-                }else {
+                } else {
 
                     binding.textInputLayout2.setHelperTextEnabled(true);
                     Drawable tickIcon = getResources().getDrawable(R.drawable.baseline_error_24);
@@ -165,37 +168,36 @@ DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenc
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String cfPassword = charSequence.toString();
                 String passwordInput = binding.password.toString();
-                Log.e("concu","Pass"+cfPassword);
-                Log.e("concu","confirm pass:" +pw[0].toString());
+                Log.e("concu", "Pass" + cfPassword);
+                Log.e("concu", "confirm pass:" + pw[0].toString());
 
                 boolean match = false;
 //                if (cfPassword.length()>=8){
-                if (pw[0].equals(cfPassword)){
-                    match=true;
+                if (pw[0].equals(cfPassword)) {
+                    match = true;
                 }
-                    if (match)
-                    {
+                if (match) {
 
 
-                        binding.textInputLayout3.setHelperTextEnabled(true);
-                        Drawable tickIcon = getResources().getDrawable(R.drawable.baseline_check_circle_24);
-                        tickIcon.setBounds(0, 0, tickIcon.getIntrinsicWidth(), tickIcon.getIntrinsicHeight());
-                        ImageSpan tickSpan = new ImageSpan(tickIcon, ImageSpan.ALIGN_BOTTOM);
-                        SpannableString spannableString = new SpannableString("  Password match");
-                        spannableString.setSpan(tickSpan, 0, 1, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-                        binding.textInputLayout3.setHelperText(spannableString);
-                        binding.textInputLayout3.setError("");
-                        binding.textInputLayout3.setHelperTextColor(ColorStateList.valueOf(ContextCompat.getColor(RegisterActivity.this, R.color.tickColor)));
-                    }else{
-                        binding.textInputLayout3.setHelperTextEnabled(true);
-                        Drawable tickIcon = getResources().getDrawable(R.drawable.baseline_error_24);
-                        tickIcon.setBounds(0, 0, tickIcon.getIntrinsicWidth(), tickIcon.getIntrinsicHeight());
-                        ImageSpan tickSpan = new ImageSpan(tickIcon, ImageSpan.ALIGN_BOTTOM);
-                        SpannableString spannableString = new SpannableString("  Password not match");
-                        spannableString.setSpan(tickSpan, 0, 1, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-                        binding.textInputLayout3.setError(spannableString);
-                        binding.textInputLayout3.setErrorTextColor(ColorStateList.valueOf(ContextCompat.getColor(RegisterActivity.this, R.color.errorColor)));
-                    }
+                    binding.textInputLayout3.setHelperTextEnabled(true);
+                    Drawable tickIcon = getResources().getDrawable(R.drawable.baseline_check_circle_24);
+                    tickIcon.setBounds(0, 0, tickIcon.getIntrinsicWidth(), tickIcon.getIntrinsicHeight());
+                    ImageSpan tickSpan = new ImageSpan(tickIcon, ImageSpan.ALIGN_BOTTOM);
+                    SpannableString spannableString = new SpannableString("  Password match");
+                    spannableString.setSpan(tickSpan, 0, 1, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+                    binding.textInputLayout3.setHelperText(spannableString);
+                    binding.textInputLayout3.setError("");
+                    binding.textInputLayout3.setHelperTextColor(ColorStateList.valueOf(ContextCompat.getColor(RegisterActivity.this, R.color.tickColor)));
+                } else {
+                    binding.textInputLayout3.setHelperTextEnabled(true);
+                    Drawable tickIcon = getResources().getDrawable(R.drawable.baseline_error_24);
+                    tickIcon.setBounds(0, 0, tickIcon.getIntrinsicWidth(), tickIcon.getIntrinsicHeight());
+                    ImageSpan tickSpan = new ImageSpan(tickIcon, ImageSpan.ALIGN_BOTTOM);
+                    SpannableString spannableString = new SpannableString("  Password not match");
+                    spannableString.setSpan(tickSpan, 0, 1, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+                    binding.textInputLayout3.setError(spannableString);
+                    binding.textInputLayout3.setErrorTextColor(ColorStateList.valueOf(ContextCompat.getColor(RegisterActivity.this, R.color.errorColor)));
+                }
 //                }else {
 //                    binding.textInputLayout3.setError("Password must be 8 characters");
 //                    binding.textInputLayout3.setError("");
@@ -209,41 +211,48 @@ DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenc
         });
 
 
-binding.registerBtn.setOnClickListener(view1 -> mAuth.createUserWithEmailAndPassword(binding.email.getText().toString().trim(), binding.password.getText().toString().trim()).addOnCompleteListener(RegisterActivity.this, task -> {
-  if (task.isSuccessful()){
-      String email = binding.email.getText().toString().trim();
-      String password = binding.password.getText().toString().trim();
-      String fullname = binding.fullname.getText().toString().trim();
-      String phoneNumber =  binding.phoneNumber.getText().toString().trim();
-      User user= new User(fullname, email, password, phoneNumber);
-      databaseReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user).addOnCompleteListener(task1 -> {
-          if (task1.isSuccessful()){
-              Toast.makeText(this, "Registration success", Toast.LENGTH_LONG).show();
-          } else {
-              Toast.makeText(RegisterActivity.this, "Registration failed." + task.getException(),
-                      Toast.LENGTH_SHORT).show();
-          }
-      });
+        binding.registerBtn.setOnClickListener(view1 -> mAuth.createUserWithEmailAndPassword(binding.email.getText().toString().trim(), binding.password.getText().toString().trim()).addOnCompleteListener(RegisterActivity.this, task -> {
+            if (task.isSuccessful()) {
+                String userName = binding.username.getText().toString().trim();
+                String email = binding.email.getText().toString().trim();
+                String password = binding.password.getText().toString().trim();
+                String fullName = binding.fullname.getText().toString().trim();
+                String phoneNumber = binding.phoneNumber.getText().toString().trim();
+                Users users = new Users(userName, fullName, phoneNumber);
 
-      Log.e("test",binding.email.getText().toString().trim());
-      Log.e("test",binding.password.getText().toString().trim());
-      FirebaseUser firebaseUser = mAuth.getCurrentUser();
-      firebaseUser.sendEmailVerification();
+//                -child username
+//                -child user id
+                databaseReference.child(FirebaseAuth.getInstance().getUid()).setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Toast.makeText(RegisterActivity.this, "Successfully Updated", Toast.LENGTH_SHORT).show();
+                        if (!task.isSuccessful()) {
+                            Toast.makeText(RegisterActivity.this, "Updated Failed", Toast.LENGTH_SHORT).show();
 
-      Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-      intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-      startActivity(intent);
-      finish();
-      Toast.makeText(RegisterActivity.this, "createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
-  }
-    if (!task.isSuccessful()) {
-        Toast.makeText(RegisterActivity.this, "Register failed." + task.getException(),
-                Toast.LENGTH_SHORT).show();
-    } else {
-        startActivity(new Intent(RegisterActivity.this, MainActivity.class));
-        finish();
-    }
-}));
+                        }
+                    }
+                });
+
+
+                Log.e("test", binding.email.getText().toString().trim());
+                Log.e("test", binding.password.getText().toString().trim());
+                FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                firebaseUser.sendEmailVerification();
+
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+                Toast.makeText(RegisterActivity.this, "createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
+            }
+            if (!task.isSuccessful()) {
+                Toast.makeText(RegisterActivity.this, "Register failed." + task.getException(),
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                finish();
+            }
+        }));
 
     }
 

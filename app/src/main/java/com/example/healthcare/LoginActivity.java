@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this, "signInWithEmail: "+binding.email.getText().toString().trim()+" :success", Toast.LENGTH_SHORT).show();
                                 Log.d("checkLogin", "signInWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
-                                Intent intent = new Intent(LoginActivity.this, HomePatientAcitivity.class);
+                                Intent intent = new Intent(LoginActivity.this, HomePatientActivity.class);
                                 startActivity(intent);
                                 finish();
                                 //updateUI(user);

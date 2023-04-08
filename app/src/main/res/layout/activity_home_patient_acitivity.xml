@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomePatientAcitivity">
+    tools:context=".HomePatientActivity">
 
 
     <Button
@@ -12,9 +12,10 @@
         android:layout_width="211dp"
         android:layout_height="45dp"
         android:background="@drawable/button_danger"
+        android:fontFamily="@font/nunito_semibold"
         android:text="SignOut"
         android:textColor="#C62828"
-        android:textSize="16sp"
+        android:textSize="13dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,9 +35,10 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/welcome"
+            android:id="@+id/welcomeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Welcome User"
             android:textColor="#ffffff"
             android:textSize="26sp" />
 
@@ -55,10 +57,10 @@
         android:layout_marginTop="81dp"
         android:layout_marginBottom="237dp"
         android:background="@drawable/button_home"
-        android:fontFamily="@font/roboto"
+        android:fontFamily="@font/nunito_semibold"
         android:text="Medical Folder"
         android:textColor="#22BE87"
-        android:textSize="12dp"
+        android:textSize="13dp"
         app:layout_constraintBottom_toTopOf="@+id/signOutBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.47"
@@ -70,16 +72,17 @@
         android:id="@+id/myDoctors"
         android:layout_width="105dp"
         android:layout_height="96dp"
-        android:layout_marginTop="80dp"
         android:background="@drawable/button_home"
-        android:fontFamily="@font/roboto"
+        android:fontFamily="@font/nunito_semibold"
         android:text="My Doctors"
         android:textColor="#22BE87"
-        android:textSize="12dp"
+        android:textSize="13dp"
+        app:layout_constraintBottom_toTopOf="@+id/signOutBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.859"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.555" />
 
     <Button
         android:id="@+id/appointement2"
@@ -88,10 +91,10 @@
         android:layout_marginTop="220dp"
         android:layout_marginBottom="98dp"
         android:background="@drawable/button_home"
-        android:fontFamily="@font/roboto"
+        android:fontFamily="@font/nunito_semibold"
         android:text="Appointement"
         android:textColor="#22BE87"
-        android:textSize="12dp"
+        android:textSize="13dp"
         app:layout_constraintBottom_toTopOf="@+id/signOutBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.673"
@@ -106,10 +109,10 @@
         android:layout_marginTop="220dp"
         android:layout_marginBottom="98dp"
         android:background="@drawable/button_home"
-        android:fontFamily="@font/roboto"
+        android:fontFamily="@font/nunito_semibold"
         android:text="Profile"
         android:textColor="#22BE87"
-        android:textSize="12dp"
+        android:textSize="13dp"
         app:layout_constraintBottom_toTopOf="@+id/signOutBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.241"
@@ -124,10 +127,10 @@
         android:layout_marginTop="81dp"
         android:layout_marginBottom="237dp"
         android:background="@drawable/button_home"
-        android:fontFamily="@font/roboto"
+        android:fontFamily="@font/nunito_semibold"
         android:text="Search"
         android:textColor="#22BE87"
-        android:textSize="12dp"
+        android:textSize="13dp"
         app:layout_constraintBottom_toTopOf="@+id/signOutBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.084"

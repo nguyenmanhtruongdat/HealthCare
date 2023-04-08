@@ -21,4 +21,8 @@
         <item>#F7CF8B</item>
         <item>#FD96A2</item>
     </array>
+    <color name="dialog_text_color">#08FF00</color>
+    <color name="dialog_stroke_color">#00CCCCCC</color>
+    <color name="dialog_button_text_color">#08FF00</color>
+
 </resources>
