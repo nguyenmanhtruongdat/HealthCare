@@ -4,56 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterActivity"
+    tools:context=".LoginActivity"
     android:background="@drawable/back2">
 
     <TextView
         android:id="@+id/singIn"
-        android:layout_width="match_parent"
+        android:layout_width="412dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginEnd="0dp"
         android:layout_marginBottom="20dp"
         android:fontFamily="@font/nunito_bold"
         android:gravity="center"
-        android:text="Create Account"
+        android:text="Create Doctor Account"
         android:textColor="@color/white"
         android:textSize="35dp"
         android:textStyle="bold" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutUsername"
-        style="@style/LoginTextInputLayoutStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/singIn"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:hint="Username"
-        android:textColorHint="@color/white"
-        app:boxBackgroundColor="@color/mycolor"
-        app:boxBackgroundMode="outline"
-        app:counterTextColor="@color/white"
-        app:helperText="Enter username"
-        app:helperTextEnabled="true"
-        app:helperTextTextColor="@color/white"
-        app:startIconDrawable="@drawable/baseline_person_24"
-        app:startIconTint="@color/white">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/username"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fontFamily="@font/nunito"
-            android:inputType="text"
-            android:textColor="@color/white">
-
-        </com.google.android.material.textfield.TextInputEditText>
-
-    </com.google.android.material.textfield.TextInputLayout>
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -61,7 +30,7 @@
         style="@style/LoginTextInputLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textInputLayoutUsername"
+        android:layout_below="@id/singIn"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
@@ -156,10 +125,43 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutMajor"
+        style="@style/LoginTextInputLayoutStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textInputLayoutPhone"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:hint="Major"
+        android:textColorHint="@color/white"
+        app:boxBackgroundColor="@color/mycolor"
+        app:boxBackgroundMode="outline"
+        app:counterTextColor="@color/white"
+        app:helperText="Choose major"
+        app:helperTextEnabled="true"
+        app:helperTextTextColor="@color/white"
+        app:startIconDrawable="@drawable/baseline_menu_24"
+        app:startIconTint="@color/white">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/major"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/nunito"
+            android:inputType="text"
+            android:textColor="@color/white">
+
+        </com.google.android.material.textfield.TextInputEditText>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:layout_below="@id/textInputLayoutPhone"
+        android:layout_below="@id/textInputLayoutMajor"
         app:startIconDrawable="@drawable/baseline_key_24"
         app:endIconMode="password_toggle"
         app:endIconTint="@color/white"
@@ -231,42 +233,42 @@
         android:fontFamily="@font/nunito_semibold"
         android:text="Sign Up" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/or"
-            android:layout_below="@id/registerBtn"
-            android:text="or"
-            android:textSize="18dp"
-            android:textColor="@color/white"
-            android:layout_centerHorizontal="true"
-            android:fontFamily="@font/nunito_semibold"
-            android:layout_margin="0dp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/socialIcons"
-        android:layout_alignParentBottom="true"
-        android:gravity="center">
+        android:id="@+id/or"
+        android:layout_below="@id/registerBtn"
+        android:text="or"
+        android:textSize="18dp"
+        android:textColor="@color/white"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/nunito_semibold"
+        android:layout_margin="0dp"/>
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/socialIcons"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:gravity="center">-->
 
 
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_margin="20dp"
-            android:src="@drawable/google"/>
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_margin="20dp"
-            android:src="@drawable/fb"/>
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_margin="20dp"
-            android:src="@drawable/twitter"/>
+<!--        <ImageView-->
+<!--            android:layout_width="48dp"-->
+<!--            android:layout_height="48dp"-->
+<!--            android:layout_margin="20dp"-->
+<!--            android:src="@drawable/google"/>-->
+<!--        <ImageView-->
+<!--            android:layout_width="48dp"-->
+<!--            android:layout_height="48dp"-->
+<!--            android:layout_margin="20dp"-->
+<!--            android:src="@drawable/fb"/>-->
+<!--        <ImageView-->
+<!--            android:layout_width="48dp"-->
+<!--            android:layout_height="48dp"-->
+<!--            android:layout_margin="20dp"-->
+<!--            android:src="@drawable/twitter"/>-->
 
-    </LinearLayout>
+<!--    </LinearLayout>-->
 
 </RelativeLayout>

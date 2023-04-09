@@ -1,8 +1,10 @@
 package com.example.healthcare;
 
-public class Users {
+import java.io.Serializable;
 
-    String userName, fullName, age, phoneNumber;
+public class Users implements Serializable {
+
+    String userName, fullName, age, phoneNumber, email;
 
     public Users() {
     }
@@ -12,6 +14,13 @@ public class Users {
         this.fullName = fullName;
         this.phoneNumber = phoneNumber;
         this.userName = userName;
+    }
+
+    public Users(String userName, String fullName, String phoneNumber, String email) {
+        this.fullName = fullName;
+        this.phoneNumber = phoneNumber;
+        this.userName = userName;
+        this.email = email;
     }
 
     public String getUserName() {
@@ -44,5 +53,13 @@ public class Users {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

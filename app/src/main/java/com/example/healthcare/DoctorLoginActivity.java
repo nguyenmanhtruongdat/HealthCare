@@ -16,27 +16,23 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.healthcare.databinding.ActivityLoginBinding;
+import com.example.healthcare.databinding.ActivityDoctorLoginBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-
-public class LoginActivity extends AppCompatActivity {
-    private ActivityLoginBinding binding;
+public class DoctorLoginActivity extends AppCompatActivity {
+    private ActivityDoctorLoginBinding binding;
     private FirebaseAuth mAuth;
-
-    boolean passwordVisible;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        mAuth = FirebaseAuth.getInstance();
-
         super.onCreate(savedInstanceState);
-        binding = ActivityLoginBinding.inflate(getLayoutInflater());
+        binding=ActivityDoctorLoginBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+        mAuth = FirebaseAuth.getInstance();
         binding.loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,10 +52,10 @@ public class LoginActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
-                                Toast.makeText(LoginActivity.this, "signInWithEmail: "+binding.email.getText().toString().trim()+" :success", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(DoctorLoginActivity.this, "signInWithEmail: "+binding.email.getText().toString().trim()+" :success", Toast.LENGTH_SHORT).show();
                                 Log.d("checkLogin", "signInWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
-                                Intent intent = new Intent(LoginActivity.this, HomePatientActivity.class);
+                                Intent intent = new Intent(DoctorLoginActivity.this, DoctorHomeActivity.class);
                                 startActivity(intent);
                                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                 finish();
@@ -67,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                Toast.makeText(DoctorLoginActivity.this, "Authentication failed.",
                                         Toast.LENGTH_SHORT).show();
                                 //updateUI(null);
                             }
@@ -77,9 +73,9 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         binding.register.setOnClickListener(view2 -> startActivity(
-                new Intent(LoginActivity.this, RegisterActivity.class)));
+                new Intent(DoctorLoginActivity.this, DoctorRegisterActivity.class)));
         binding.forgotPass.setOnClickListener(view3 -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(DoctorLoginActivity.this);
             View dialogView = getLayoutInflater().inflate(R.layout.dialog_forgot, null);
             EditText emailBox = dialogView.findViewById(R.id.emailBox);
             builder.setView(dialogView);
@@ -89,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     String email = emailBox.getText().toString().trim();
                     if (TextUtils.isEmpty(email) && !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                        Toast.makeText(LoginActivity.this,"Enter your email", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DoctorLoginActivity.this,"Enter your email", Toast.LENGTH_SHORT).show();
                         return;
                     }
                     mAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -97,11 +93,11 @@ public class LoginActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful())
                             {
-                                Toast.makeText(LoginActivity.this, "Check your email for reset link !", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(DoctorLoginActivity.this, "Check your email for reset link !", Toast.LENGTH_SHORT).show();
                                 dialog.dismiss();
 
                             }else {
-                                Toast.makeText(LoginActivity.this, "Send failed", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(DoctorLoginActivity.this, "Send failed", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

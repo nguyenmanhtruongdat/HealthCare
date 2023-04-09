@@ -4,20 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
+    tools:context=".DoctorLoginActivity"
     android:background="@drawable/b3">
+
     <TextView
+        android:id="@+id/singIn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/singIn"
-        android:text="Sign in"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="50dp"
+        android:fontFamily="@font/nunito_bold"
+        android:gravity="center"
+        android:text="Doctor Login"
         android:textColor="@color/white"
         android:textSize="35dp"
-        android:textStyle="bold"
-        android:layout_margin="50dp"
-        android:gravity="center"
-        android:fontFamily="@font/nunito_bold"
-        />
+        android:textStyle="bold" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout1"

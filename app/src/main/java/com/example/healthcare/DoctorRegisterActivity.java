@@ -17,7 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import com.example.healthcare.databinding.ActivityRegisterBinding;
+import com.example.healthcare.databinding.ActivityDoctorRegisterBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,25 +28,23 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class RegisterActivity extends AppCompatActivity {
-    private ActivityRegisterBinding binding;
+public class DoctorRegisterActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     final String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
 
     final String passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
-
-
+    private ActivityDoctorRegisterBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityRegisterBinding.inflate(getLayoutInflater());
+        binding = ActivityDoctorRegisterBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
         final String[] pw = {null};
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("Users");
+        databaseReference = firebaseDatabase.getReference("Doctors");
         mAuth = FirebaseAuth.getInstance();
         binding.email.addTextChangedListener(new TextWatcher() {
             @Override
@@ -70,7 +68,7 @@ public class RegisterActivity extends AppCompatActivity {
                     spannableString.setSpan(tickSpan, 0, 1, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
                     binding.textInputLayout1.setHelperText(spannableString);
                     binding.textInputLayout1.setError("");
-                    binding.textInputLayout1.setHelperTextColor(ColorStateList.valueOf(ContextCompat.getColor(RegisterActivity.this, R.color.tickColor)));
+                    binding.textInputLayout1.setHelperTextColor(ColorStateList.valueOf(ContextCompat.getColor(DoctorRegisterActivity.this, R.color.tickColor)));
 
                 } else {
 
@@ -81,7 +79,7 @@ public class RegisterActivity extends AppCompatActivity {
                     SpannableString spannableString = new SpannableString("  Please enter a valid email");
                     spannableString.setSpan(tickSpan, 0, 1, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
                     binding.textInputLayout1.setError(spannableString);
-                    binding.textInputLayout1.setErrorTextColor(ColorStateList.valueOf(ContextCompat.getColor(RegisterActivity.this, R.color.errorColor)));
+                    binding.textInputLayout1.setErrorTextColor(ColorStateList.valueOf(ContextCompat.getColor(DoctorRegisterActivity.this, R.color.errorColor)));
 
 
                 }
@@ -97,7 +95,6 @@ public class RegisterActivity extends AppCompatActivity {
 
             }
         });
-
         binding.password.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -122,7 +119,7 @@ public class RegisterActivity extends AppCompatActivity {
                         spannableString.setSpan(tickSpan, 0, 1, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
                         binding.textInputLayout2.setHelperText(spannableString);
                         binding.textInputLayout2.setError("");
-                        binding.textInputLayout2.setHelperTextColor(ColorStateList.valueOf(ContextCompat.getColor(RegisterActivity.this, R.color.tickColor)));
+                        binding.textInputLayout2.setHelperTextColor(ColorStateList.valueOf(ContextCompat.getColor(DoctorRegisterActivity.this, R.color.tickColor)));
                     } else {
                         binding.textInputLayout2.setHelperTextEnabled(true);
                         Drawable tickIcon = getResources().getDrawable(R.drawable.baseline_error_24);
@@ -131,7 +128,7 @@ public class RegisterActivity extends AppCompatActivity {
                         SpannableString spannableString = new SpannableString("  Password must be at least 8 characters long,at least one uppercase and lower letter and one digit and special character.");
                         spannableString.setSpan(tickSpan, 0, 1, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
                         binding.textInputLayout2.setError(spannableString);
-                        binding.textInputLayout2.setErrorTextColor(ColorStateList.valueOf(ContextCompat.getColor(RegisterActivity.this, R.color.errorColor)));
+                        binding.textInputLayout2.setErrorTextColor(ColorStateList.valueOf(ContextCompat.getColor(DoctorRegisterActivity.this, R.color.errorColor)));
 
 //                        binding.textInputLayout2.setError("Password must be at least 8 characters long,at least one uppercase and lower letter and one digit and special character.");
                     }
@@ -144,7 +141,7 @@ public class RegisterActivity extends AppCompatActivity {
                     SpannableString spannableString = new SpannableString("  Password must be at least 8 characters");
                     spannableString.setSpan(tickSpan, 0, 1, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
                     binding.textInputLayout2.setError(spannableString);
-                    binding.textInputLayout2.setErrorTextColor(ColorStateList.valueOf(ContextCompat.getColor(RegisterActivity.this, R.color.errorColor)));
+                    binding.textInputLayout2.setErrorTextColor(ColorStateList.valueOf(ContextCompat.getColor(DoctorRegisterActivity.this, R.color.errorColor)));
 
 
 //                    binding.textInputLayout2.setHelperText("Password must be at least 8 characters");
@@ -152,12 +149,13 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
 
+
+
             @Override
             public void afterTextChanged(Editable editable) {
 
             }
         });
-
         binding.cfPassword.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -187,7 +185,7 @@ public class RegisterActivity extends AppCompatActivity {
                     spannableString.setSpan(tickSpan, 0, 1, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
                     binding.textInputLayout3.setHelperText(spannableString);
                     binding.textInputLayout3.setError("");
-                    binding.textInputLayout3.setHelperTextColor(ColorStateList.valueOf(ContextCompat.getColor(RegisterActivity.this, R.color.tickColor)));
+                    binding.textInputLayout3.setHelperTextColor(ColorStateList.valueOf(ContextCompat.getColor(DoctorRegisterActivity.this, R.color.tickColor)));
                 } else {
                     binding.textInputLayout3.setHelperTextEnabled(true);
                     Drawable tickIcon = getResources().getDrawable(R.drawable.baseline_error_24);
@@ -196,7 +194,7 @@ public class RegisterActivity extends AppCompatActivity {
                     SpannableString spannableString = new SpannableString("  Password not match");
                     spannableString.setSpan(tickSpan, 0, 1, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
                     binding.textInputLayout3.setError(spannableString);
-                    binding.textInputLayout3.setErrorTextColor(ColorStateList.valueOf(ContextCompat.getColor(RegisterActivity.this, R.color.errorColor)));
+                    binding.textInputLayout3.setErrorTextColor(ColorStateList.valueOf(ContextCompat.getColor(DoctorRegisterActivity.this, R.color.errorColor)));
                 }
 //                }else {
 //                    binding.textInputLayout3.setError("Password must be 8 characters");
@@ -209,25 +207,23 @@ public class RegisterActivity extends AppCompatActivity {
 
             }
         });
-
-
-        binding.registerBtn.setOnClickListener(view1 -> mAuth.createUserWithEmailAndPassword(binding.email.getText().toString().trim(), binding.password.getText().toString().trim()).addOnCompleteListener(RegisterActivity.this, task -> {
+        binding.registerBtn.setOnClickListener(view1 -> mAuth.createUserWithEmailAndPassword(binding.email.getText().toString().trim(), binding.password.getText().toString().trim()).addOnCompleteListener(DoctorRegisterActivity.this, task -> {
             if (task.isSuccessful()) {
-                String userName = binding.username.getText().toString().trim();
                 String email = binding.email.getText().toString().trim();
                 String password = binding.password.getText().toString().trim();
+                String major = binding.major.getText().toString().trim();
                 String fullName = binding.fullname.getText().toString().trim();
                 String phoneNumber = binding.phoneNumber.getText().toString().trim();
-                Users users = new Users(userName, fullName, phoneNumber);
+                Doctors doctors = new Doctors(fullName, email, phoneNumber, major);
 
 //                -child username
 //                -child user id
-                databaseReference.child(FirebaseAuth.getInstance().getUid()).setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
+                databaseReference.child(FirebaseAuth.getInstance().getUid()).setValue(doctors).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(RegisterActivity.this, "Successfully Updated", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DoctorRegisterActivity.this, "Successfully Updated", Toast.LENGTH_SHORT).show();
                         if (!task.isSuccessful()) {
-                            Toast.makeText(RegisterActivity.this, "Updated Failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(DoctorRegisterActivity.this, "Updated Failed", Toast.LENGTH_SHORT).show();
 
                         }
                     }
@@ -239,24 +235,21 @@ public class RegisterActivity extends AppCompatActivity {
                 FirebaseUser firebaseUser = mAuth.getCurrentUser();
                 firebaseUser.sendEmailVerification();
 
-                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                Intent intent = new Intent(DoctorRegisterActivity.this, DoctorLoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();
-                Toast.makeText(RegisterActivity.this, "createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(DoctorRegisterActivity.this, "createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
             }
             if (!task.isSuccessful()) {
-                Toast.makeText(RegisterActivity.this, "Register failed." + task.getException(),
+                Toast.makeText(DoctorRegisterActivity.this, "Register failed." + task.getException(),
                         Toast.LENGTH_SHORT).show();
             } else {
-                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                startActivity(new Intent(DoctorRegisterActivity.this, DoctorLoginActivity.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();
             }
         }));
-
     }
-
-
 }

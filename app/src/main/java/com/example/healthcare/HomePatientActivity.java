@@ -43,6 +43,7 @@ public class HomePatientActivity extends AppCompatActivity {
                 mAuth.signOut();
                 Intent intent = new Intent(HomePatientActivity.this, LoginActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();
             });
 
@@ -57,6 +58,17 @@ public class HomePatientActivity extends AppCompatActivity {
             // Show the dialog
         });
 
+        binding.userProfile.setOnClickListener(view2 -> {
+            Intent intent = new Intent(HomePatientActivity.this, UserProfileActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        });
+
+        binding.searchBtn.setOnClickListener(view3->{
+            Intent intent = new Intent(HomePatientActivity.this, SearchPatActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        });
 
 
     }
@@ -73,6 +85,11 @@ public class HomePatientActivity extends AppCompatActivity {
                     if (snapshot.exists()) {
                         String fullName = snapshot.child("fullName").getValue(String.class);
                         binding.welcomeText.setText("Welcome " + fullName + "!");
+
+                        String logData = snapshot.child("logData").getValue(String.class);
+                        Intent intent = new Intent(HomePatientActivity.this, UserProfileActivity.class);
+                        intent.putExtra("logData", logData);
+                        //startActivity(intent);
                     }
                 }
 

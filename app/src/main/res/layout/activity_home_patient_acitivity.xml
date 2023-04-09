@@ -8,19 +8,40 @@
 
 
     <Button
-        android:id="@+id/signOutBtn"
-        android:layout_width="211dp"
-        android:layout_height="45dp"
+        android:id="@+id/userProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@drawable/button_danger"
-        android:fontFamily="@font/nunito_semibold"
-        android:text="SignOut"
-        android:textColor="#C62828"
+        android:drawableLeft="@drawable/baseline_person_24"
+        android:fontFamily="@font/nunito_bold"
+        android:text="USER PROFILE"
+        android:textColor="#4CAF50"
         android:textSize="13dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.056"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.916" />
+        app:layout_constraintVertical_bias="0.976" />
+
+    <Button
+        android:id="@+id/signOutBtn"
+        android:layout_width="168dp"
+        android:layout_height="48dp"
+        android:background="@drawable/button_danger"
+        android:drawableLeft="@drawable/baseline_logout_24"
+        android:fontFamily="@font/nunito_bold"
+        android:text="LOG OUT"
+        android:textColor="#C62828"
+        android:textSize="13dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.934"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.976" />
 
     <LinearLayout
         android:id="@+id/view"
