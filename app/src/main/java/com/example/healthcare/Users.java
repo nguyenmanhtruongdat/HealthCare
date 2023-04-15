@@ -4,20 +4,30 @@ import java.io.Serializable;
 
 public class Users implements Serializable {
 
-    String userName, fullName, age, phoneNumber, email;
+    String userName, fullName, age, phoneNumber, email, role;
 
     public Users() {
     }
 
+    public String getRole() {
+        return role;
+    }
 
-    public Users(String userName, String fullName, String phoneNumber) {
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public Users(String userName, String fullName, String phoneNumber, String email, String role) {
         this.fullName = fullName;
+        this.email=email;
         this.phoneNumber = phoneNumber;
         this.userName = userName;
+        this.role=role;
     }
 
     public Users(String userName, String fullName, String phoneNumber, String email) {
         this.fullName = fullName;
+        this.role=role;
         this.phoneNumber = phoneNumber;
         this.userName = userName;
         this.email = email;

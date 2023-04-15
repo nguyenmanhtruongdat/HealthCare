@@ -5,268 +5,280 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RegisterActivity"
-    android:background="@drawable/back2">
+    android:background="@drawable/back_sign_in">
 
-    <TextView
-        android:id="@+id/singIn"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="20dp"
-        android:fontFamily="@font/nunito_bold"
-        android:gravity="center"
-        android:text="Create Account"
-        android:textColor="@color/white"
-        android:textSize="35dp"
-        android:textStyle="bold" />
+        android:layout_height="match_parent">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutUsername"
-        style="@style/LoginTextInputLayoutStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/singIn"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:hint="Username"
-        android:textColorHint="@color/white"
-        app:boxBackgroundColor="@color/mycolor"
-        app:boxBackgroundMode="outline"
-        app:counterTextColor="@color/white"
-        app:helperText="Enter username"
-        app:helperTextEnabled="true"
-        app:helperTextTextColor="@color/white"
-        app:startIconDrawable="@drawable/baseline_person_24"
-        app:startIconTint="@color/white">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/username"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fontFamily="@font/nunito"
-            android:inputType="text"
-            android:textColor="@color/white">
+            android:layout_height="match_parent">
 
-        </com.google.android.material.textfield.TextInputEditText>
+            <TextView
+                android:id="@+id/singIn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="50dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/nunito_bold"
+                android:gravity="center"
+                android:text="Create Account"
+                android:textColor="@color/white"
+                android:textSize="35dp"
+                android:textStyle="bold" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutUsername"
+                style="@style/LoginTextInputLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/singIn"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:hint="Username"
+                android:textColorHint="@color/white"
+                app:boxBackgroundColor="@color/mycolor"
+                app:boxBackgroundMode="outline"
+                app:counterTextColor="@color/white"
+                app:helperText="Enter username"
+                app:helperTextEnabled="true"
+                app:helperTextTextColor="@color/white"
+                app:startIconDrawable="@drawable/baseline_person_24"
+                app:startIconTint="@color/white">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/username"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/nunito"
+                    android:inputType="text"
+                    android:textColor="@color/white">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout0"
-        style="@style/LoginTextInputLayoutStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textInputLayoutUsername"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:hint="Full name"
-        android:textColorHint="@color/white"
-        app:boxBackgroundColor="@color/mycolor"
-        app:boxBackgroundMode="outline"
-        app:counterTextColor="@color/white"
-        app:helperText="Enter full name"
-        app:helperTextEnabled="true"
-        app:helperTextTextColor="@color/white"
-        app:startIconDrawable="@drawable/baseline_person_24"
-        app:startIconTint="@color/white">
+                </com.google.android.material.textfield.TextInputEditText>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/fullname"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fontFamily="@font/nunito"
-            android:inputType="text"
-            android:textColor="@color/white">
-
-        </com.google.android.material.textfield.TextInputEditText>
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout1"
-        style="@style/LoginTextInputLayoutStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textInputLayout0"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:hint="Email"
-        android:textColorHint="@color/white"
-        app:boxBackgroundColor="@color/mycolor"
-        app:boxBackgroundMode="outline"
-        app:counterTextColor="@color/white"
-        app:helperText="Enter email"
-        app:helperTextEnabled="true"
-        app:helperTextTextColor="@color/white"
-        app:startIconDrawable="@drawable/baseline_person_24"
-        app:startIconTint="@color/white">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/email"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fontFamily="@font/nunito"
-            android:inputType="text"
-            android:textColor="@color/white">
-
-        </com.google.android.material.textfield.TextInputEditText>
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutPhone"
-        style="@style/LoginTextInputLayoutStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textInputLayout1"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:hint="Phone number"
-        android:textColorHint="@color/white"
-        app:boxBackgroundColor="@color/mycolor"
-        app:boxBackgroundMode="outline"
-        app:counterTextColor="@color/white"
-        app:helperText="Enter phone number"
-        app:helperTextEnabled="true"
-        app:helperTextTextColor="@color/white"
-        app:startIconDrawable="@drawable/baseline_person_24"
-        app:startIconTint="@color/white">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/phoneNumber"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fontFamily="@font/nunito"
-            android:inputType="text"
-            android:textColor="@color/white">
-
-        </com.google.android.material.textfield.TextInputEditText>
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_below="@id/textInputLayoutPhone"
-        app:startIconDrawable="@drawable/baseline_key_24"
-        app:endIconMode="password_toggle"
-        app:endIconTint="@color/white"
-        app:startIconTint="@color/white"
-        app:boxBackgroundMode="outline"
-        app:boxBackgroundColor="@color/mycolor"
-        android:hint="Password"
-        android:textColorHint="@color/white"
-        app:helperTextEnabled="true"
-        app:helperText="Enter password"
-        app:helperTextTextColor="@color/white"
-        app:counterEnabled="true"
-        app:counterMaxLength="25"
-        app:counterTextColor="@color/white"
-        android:id="@+id/textInputLayout2"
-        style="@style/LoginTextInputLayoutStyle">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/password"
-            android:layout_width="match_parent"
-            android:textColor="@color/white"
-            android:layout_height="match_parent"
-            android:fontFamily="@font/nunito"
-            android:inputType="textPassword">
-
-        </com.google.android.material.textfield.TextInputEditText>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_below="@id/textInputLayout2"
-        app:startIconDrawable="@drawable/baseline_key_24"
-        app:endIconMode="password_toggle"
-        app:endIconTint="@color/white"
-        app:startIconTint="@color/white"
-        app:boxBackgroundMode="outline"
-        app:boxBackgroundColor="@color/mycolor"
-        android:hint="Confirm password"
-        android:textColorHint="@color/white"
-        app:helperTextEnabled="true"
-        app:helperText="Confirm password"
-        app:helperTextTextColor="@color/white"
-        app:counterTextColor="@color/white"
-        android:id="@+id/textInputLayout3"
-        style="@style/LoginTextInputLayoutStyle">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/cfPassword"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textColor="@color/white"
-            android:fontFamily="@font/nunito"
-            android:inputType="textPassword">
-
-        </com.google.android.material.textfield.TextInputEditText>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/registerBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textInputLayout3"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:backgroundTint="@color/design_default_color_secondary"
-        android:fontFamily="@font/nunito_semibold"
-        android:text="Sign Up" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/or"
-            android:layout_below="@id/registerBtn"
-            android:text="or"
-            android:textSize="18dp"
-            android:textColor="@color/white"
-            android:layout_centerHorizontal="true"
-            android:fontFamily="@font/nunito_semibold"
-            android:layout_margin="0dp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/socialIcons"
-        android:layout_alignParentBottom="true"
-        android:gravity="center">
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_margin="20dp"
-            android:src="@drawable/google"/>
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_margin="20dp"
-            android:src="@drawable/fb"/>
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_margin="20dp"
-            android:src="@drawable/twitter"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout0"
+                style="@style/LoginTextInputLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textInputLayoutUsername"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:hint="Full name"
+                android:textColorHint="@color/white"
+                app:boxBackgroundColor="@color/mycolor"
+                app:boxBackgroundMode="outline"
+                app:counterTextColor="@color/white"
+                app:helperText="Enter full name"
+                app:helperTextEnabled="true"
+                app:helperTextTextColor="@color/white"
+                app:startIconDrawable="@drawable/baseline_person_24"
+                app:startIconTint="@color/white">
 
-    </LinearLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/fullname"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/nunito"
+                    android:inputType="text"
+                    android:textColor="@color/white">
+
+                </com.google.android.material.textfield.TextInputEditText>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout1"
+                style="@style/LoginTextInputLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textInputLayout0"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:hint="Email"
+                android:textColorHint="@color/white"
+                app:boxBackgroundColor="@color/mycolor"
+                app:boxBackgroundMode="outline"
+                app:counterTextColor="@color/white"
+                app:helperText="Enter email"
+                app:helperTextEnabled="true"
+                app:helperTextTextColor="@color/white"
+                app:startIconDrawable="@drawable/baseline_person_24"
+                app:startIconTint="@color/white">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/nunito"
+                    android:inputType="text"
+                    android:textColor="@color/white">
+
+                </com.google.android.material.textfield.TextInputEditText>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutPhone"
+                style="@style/LoginTextInputLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textInputLayout1"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:hint="Phone number"
+                android:textColorHint="@color/white"
+                app:boxBackgroundColor="@color/mycolor"
+                app:boxBackgroundMode="outline"
+                app:counterTextColor="@color/white"
+                app:helperText="Enter phone number"
+                app:helperTextEnabled="true"
+                app:helperTextTextColor="@color/white"
+                app:startIconDrawable="@drawable/baseline_person_24"
+                app:startIconTint="@color/white">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/phoneNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/nunito"
+                    android:inputType="text"
+                    android:textColor="@color/white">
+
+                </com.google.android.material.textfield.TextInputEditText>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_below="@id/textInputLayoutPhone"
+                app:startIconDrawable="@drawable/baseline_key_24"
+                app:endIconMode="password_toggle"
+                app:endIconTint="@color/white"
+                app:startIconTint="@color/white"
+                app:boxBackgroundMode="outline"
+                app:boxBackgroundColor="@color/mycolor"
+                android:hint="Password"
+                android:textColorHint="@color/white"
+                app:helperTextEnabled="true"
+                app:helperText="Enter password"
+                app:helperTextTextColor="@color/white"
+                app:counterEnabled="true"
+                app:counterMaxLength="25"
+                app:counterTextColor="@color/white"
+                android:id="@+id/textInputLayout2"
+                style="@style/LoginTextInputLayoutStyle">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/password"
+                    android:layout_width="match_parent"
+                    android:textColor="@color/white"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/nunito"
+                    android:inputType="textPassword">
+
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_below="@id/textInputLayout2"
+                app:startIconDrawable="@drawable/baseline_key_24"
+                app:endIconMode="password_toggle"
+                app:endIconTint="@color/white"
+                app:startIconTint="@color/white"
+                app:boxBackgroundMode="outline"
+                app:boxBackgroundColor="@color/mycolor"
+                android:hint="Confirm password"
+                android:textColorHint="@color/white"
+                app:helperTextEnabled="true"
+                app:helperText="Confirm password"
+                app:helperTextTextColor="@color/white"
+                app:counterTextColor="@color/white"
+                android:id="@+id/textInputLayout3"
+                style="@style/LoginTextInputLayoutStyle">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/cfPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/nunito"
+                    android:inputType="textPassword">
+
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/registerBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textInputLayout3"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/appColor"
+                android:fontFamily="@font/nunito_semibold"
+                android:text="Sign Up" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/or"
+                android:layout_below="@id/registerBtn"
+                android:text="or"
+                android:textSize="18dp"
+                android:textColor="@color/white"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/nunito_semibold"
+                android:layout_margin="0dp"/>
+
+            <!--    <LinearLayout-->
+            <!--        android:layout_width="match_parent"-->
+            <!--        android:layout_height="wrap_content"-->
+            <!--        android:id="@+id/socialIcons"-->
+            <!--        android:layout_alignParentBottom="true"-->
+            <!--        android:gravity="center">-->
+
+
+            <!--        <ImageView-->
+            <!--            android:layout_width="48dp"-->
+            <!--            android:layout_height="48dp"-->
+            <!--            android:layout_margin="20dp"-->
+            <!--            android:src="@drawable/google"/>-->
+            <!--        <ImageView-->
+            <!--            android:layout_width="48dp"-->
+            <!--            android:layout_height="48dp"-->
+            <!--            android:layout_margin="20dp"-->
+            <!--            android:src="@drawable/fb"/>-->
+            <!--        <ImageView-->
+            <!--            android:layout_width="48dp"-->
+            <!--            android:layout_height="48dp"-->
+            <!--            android:layout_margin="20dp"-->
+            <!--            android:src="@drawable/twitter"/>-->
+
+            <!--    </LinearLayout>-->
+
+        </RelativeLayout>
+
+    </ScrollView>
 
 </RelativeLayout>

@@ -5,6 +5,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -27,6 +29,8 @@ public class DoctorHomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding= ActivityDoctorHomeBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
+        requestWindowFeature(Window.FEATURE_NO_TITLE); // hide the title
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(view);
 
         binding.signOutBtn.setOnClickListener(view1 -> {
@@ -42,7 +46,7 @@ public class DoctorHomeActivity extends AppCompatActivity {
                 // If the user confirms, sign them out and redirect to login activity
                 FirebaseAuth mAuth = FirebaseAuth.getInstance();
                 mAuth.signOut();
-                Intent intent = new Intent(DoctorHomeActivity.this, DoctorLoginActivity.class);
+                Intent intent = new Intent(DoctorHomeActivity.this, LoginActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();

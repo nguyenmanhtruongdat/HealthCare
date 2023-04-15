@@ -13,11 +13,29 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthCare"
         tools:targetApi="31">
+<!--        <activity-->
+<!--            android:name=".LoginSplashActivity"-->
+<!--            android:exported="false" />-->
+        <!-- <activity -->
+        <!-- android:name=".SplashActivity" -->
+        <!-- android:exported="false" /> -->
         <activity
-            android:name=".DoctorEditProfileActivity"
+            android:name=".BookingDoctorActivity"
             android:exported="false" />
         <activity
-            android:name=".DoctorLoginActivity"
+            android:name=".MyHealthActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BMIresult"
+            android:exported="false" />
+        <activity
+            android:name=".BMICalculator"
+            android:exported="false" />
+        <activity
+            android:name=".DoctorInformationBook"
+            android:exported="false" />
+        <activity
+            android:name=".DoctorEditProfileActivity"
             android:exported="false" />
         <activity
             android:name=".DoctorRegisterActivity"
@@ -67,7 +85,7 @@
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

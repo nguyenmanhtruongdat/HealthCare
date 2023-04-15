@@ -11,6 +11,8 @@ import android.text.TextWatcher;
 import android.text.style.ImageSpan;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -41,6 +43,8 @@ public class DoctorRegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityDoctorRegisterBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
+        requestWindowFeature(Window.FEATURE_NO_TITLE); // hide the title
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(view);
         final String[] pw = {null};
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -214,7 +218,8 @@ public class DoctorRegisterActivity extends AppCompatActivity {
                 String major = binding.major.getText().toString().trim();
                 String fullName = binding.fullname.getText().toString().trim();
                 String phoneNumber = binding.phoneNumber.getText().toString().trim();
-                Doctors doctors = new Doctors(fullName, email, phoneNumber, major);
+                String role = "doctor";
+                Doctors doctors = new Doctors(fullName, email, phoneNumber, major, role);
 
 //                -child username
 //                -child user id
@@ -235,7 +240,7 @@ public class DoctorRegisterActivity extends AppCompatActivity {
                 FirebaseUser firebaseUser = mAuth.getCurrentUser();
                 firebaseUser.sendEmailVerification();
 
-                Intent intent = new Intent(DoctorRegisterActivity.this, DoctorLoginActivity.class);
+                Intent intent = new Intent(DoctorRegisterActivity.this, LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -246,7 +251,7 @@ public class DoctorRegisterActivity extends AppCompatActivity {
                 Toast.makeText(DoctorRegisterActivity.this, "Register failed." + task.getException(),
                         Toast.LENGTH_SHORT).show();
             } else {
-                startActivity(new Intent(DoctorRegisterActivity.this, DoctorLoginActivity.class));
+                startActivity(new Intent(DoctorRegisterActivity.this, LoginActivity.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();
             }

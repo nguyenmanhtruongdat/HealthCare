@@ -1,26 +1,70 @@
 package com.example.healthcare;
 
-public class Doctors {
-    private String fullName, email, phoneNumber, major, about, exp, hospitalUnitl;
+import java.io.Serializable;
+
+public class Doctors implements Serializable {
+    private String fullName, email, phoneNumber, major, about, exp, hospitalUnitl, urlImg, role;
 
     public Doctors() {
     }
 
-    public Doctors(String fullName, String email, String phoneNumber, String major, String about, String exp, String hospitalUnitl) {
+
+
+    public Doctors(String fullName, String major, String phoneNumber) {
+        this.fullName=fullName;
+        this.email=email;
+        this.phoneNumber=phoneNumber;
+        this.major=major;
+        this.about=about;
+        this.role= role;
+    }
+
+
+    public Doctors(String fullName, String email, String phoneNumber, String major, String about, String role) {
         this.fullName = fullName;
+        this.about=about;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.role=role;
         this.major = major;
-        this.about = about;
-        this.exp = exp;
-        this.hospitalUnitl = hospitalUnitl;
+    }
+
+    public Doctors(String fullName,String email,String phoneNumber,String major,String role){
+        this.fullName=fullName;
+        this.email=email;this.phoneNumber=phoneNumber;
+        this.major=major;
+        this.role=role;
+    }
+
+    public Doctors(String fullName,String email,String phoneNumber,String major,String about, int i){
+        this.fullName=fullName;
+        this.email=email;this.phoneNumber=phoneNumber;
+        this.major=major;
+        this.about=about;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getUrlImg() {
+        return urlImg;
+    }
+
+    public void setUrlImg(String urlImg) {
+        this.urlImg = urlImg;
     }
 
     public Doctors(String fullName, String email, String phoneNumber, String major) {
-        this.fullName = fullName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.major = major;
+        this.fullName=fullName;
+        this.email=email;
+        this.phoneNumber=phoneNumber;
+        this.major=major;
+        this.role=role;
     }
 
     public String getFullName() {

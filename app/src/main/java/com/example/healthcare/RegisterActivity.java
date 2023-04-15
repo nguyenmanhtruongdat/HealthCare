@@ -11,6 +11,8 @@ import android.text.TextWatcher;
 import android.text.style.ImageSpan;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -43,6 +45,8 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
+        requestWindowFeature(Window.FEATURE_NO_TITLE); // hide the title
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(view);
         final String[] pw = {null};
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -218,7 +222,8 @@ public class RegisterActivity extends AppCompatActivity {
                 String password = binding.password.getText().toString().trim();
                 String fullName = binding.fullname.getText().toString().trim();
                 String phoneNumber = binding.phoneNumber.getText().toString().trim();
-                Users users = new Users(userName, fullName, phoneNumber);
+                String role = "user";
+                Users users = new Users(userName, fullName, phoneNumber,email, role);
 
 //                -child username
 //                -child user id

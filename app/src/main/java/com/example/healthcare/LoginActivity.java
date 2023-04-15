@@ -9,6 +9,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -19,10 +21,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.healthcare.databinding.ActivityLoginBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding binding;
@@ -31,53 +36,84 @@ public class LoginActivity extends AppCompatActivity {
     boolean passwordVisible;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         mAuth = FirebaseAuth.getInstance();
 
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
+        requestWindowFeature(Window.FEATURE_NO_TITLE); // hide the title
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(view);
-        binding.loginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String username = binding.email.getText().toString();
-                String password = binding.password.getText().toString();
-                if (username.length()>0 && password.length()>0)
-                    Toast.makeText(getApplicationContext(), "Login success", Toast.LENGTH_SHORT).show();
-                else                 Toast.makeText(getApplicationContext(), "Login failed", Toast.LENGTH_SHORT).show();
-
-            }
-        });
 
         binding.loginBtn.setOnClickListener(view1 -> {
+
             mAuth.signInWithEmailAndPassword(binding.email.getText().toString().trim(), binding.password.getText().toString().trim())
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                Toast.makeText(LoginActivity.this, "signInWithEmail: "+binding.email.getText().toString().trim()+" :success", Toast.LENGTH_SHORT).show();
-                                Log.d("checkLogin", "signInWithEmail:success");
-                                FirebaseUser user = mAuth.getCurrentUser();
-                                Intent intent = new Intent(LoginActivity.this, HomePatientActivity.class);
-                                startActivity(intent);
-                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                                finish();
-                                //updateUI(user);
-                            } else {
-                                // If sign in fails, display a message to the user.
-                                Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                        Toast.LENGTH_SHORT).show();
-                                //updateUI(null);
+                    .addOnCompleteListener(this, task -> {
+                        if (task.isSuccessful()) {
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            if (user != null) {
+                                String uid = user.getUid();
+                                DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("Users").child(uid);
+                                DatabaseReference doctorsRef = FirebaseDatabase.getInstance().getReference("Doctors").child(uid);
+                                ValueEventListener valueEventListener = new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        if (dataSnapshot.exists() && dataSnapshot.child("role").getValue() != null) {
+                                            String role = dataSnapshot.child("role").getValue().toString();
+                                            if (role.equals("doctor")) {
+                                                Intent intent = new Intent(LoginActivity.this, DoctorHomeActivity.class);
+                                                startActivity(intent);
+                                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                                finish();
+                                            } else if (role.equals("user")) {
+                                                Intent intent = new Intent(LoginActivity.this, HomePatientActivity.class);
+                                                startActivity(intent);
+                                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                                finish();
+                                            }
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+                                        Log.d(TAG, "onCancelled: " + databaseError.getMessage());
+                                    }
+                                };
+                                usersRef.get().addOnCompleteListener(task1 -> {
+                                    if (task1.isSuccessful() && task1.getResult().getValue() != null) {
+                                        DataSnapshot dataSnapshot = task1.getResult();
+                                        valueEventListener.onDataChange(dataSnapshot);
+                                    } else {
+                                        doctorsRef.get().addOnCompleteListener(task2 -> {
+                                            if (task2.isSuccessful() && task2.getResult().getValue() != null) {
+                                                DataSnapshot dataSnapshot = task2.getResult();
+                                                valueEventListener.onDataChange(dataSnapshot);
+                                            }
+                                        });
+                                    }
+                                });
                             }
+
+
+                            // Sign in success, update UI with the signed-in user's information
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithEmail:failure", task.getException());
+                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            //updateUI(null);
                         }
                     });
 
         });
 
+
         binding.register.setOnClickListener(view2 -> startActivity(
                 new Intent(LoginActivity.this, RegisterActivity.class)));
+
+        binding.registerDr.setOnClickListener(view1 -> startActivity(new Intent(LoginActivity.this, DoctorRegisterActivity.class)));
+
         binding.forgotPass.setOnClickListener(view3 -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
             View dialogView = getLayoutInflater().inflate(R.layout.dialog_forgot, null);

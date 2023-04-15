@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="0dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp">
+
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/drAvatar"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_centerVertical="true"
+            app:civ_border_color="@color/gray"
+            app:civ_border_width="2dp" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/drName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/drAvatar"
+            android:fontFamily="@font/nunito_semibold"
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/drEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/drName"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/drAvatar"
+            android:fontFamily="@font/nunito_semibold"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/drMajor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/drEmail"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/drAvatar"
+            android:fontFamily="@font/nunito_semibold"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

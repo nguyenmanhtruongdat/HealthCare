@@ -14,8 +14,14 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="yellow">#FFEB3B</color>
     <color name="gray">#818181</color>
     <color name="appColor">#22BE87</color>
+    <color name="blueColor">#00B0FF</color>
+
+    <color name="textHeadline">#434343</color>
+    <color name="textDescription">#686868</color>
+    <color name="lightGrey">#EAEAEA</color>
     <!-- Array of colors that will be used by ViewPager as background colors -->
     <array name="colorPagesViewPager">
         <item>#EDD9CF</item>
@@ -27,5 +33,6 @@
     <color name="dialog_text_color">#08FF00</color>
     <color name="dialog_stroke_color">#00CCCCCC</color>
     <color name="dialog_button_text_color">#08FF00</color>
+    <color name="dark_green">#167500</color>
 
 </resources>

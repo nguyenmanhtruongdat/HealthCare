@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/spl"
+    tools:context=".fragment.HomeFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/topLayout"
+                    android:layout_marginTop="53dp"
+                    android:layout_marginBottom="19dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/fullName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="41dp"
+                        android:layout_marginLeft="41dp"
+                        android:layout_marginBottom="5dp"
+                        android:fontFamily="@font/nunito_semibold"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/fullName"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="41dp"
+                        android:layout_marginLeft="41dp"
+                        android:fontFamily="@font/nunito_semibold"
+                        android:textColor="@color/gray"
+                        android:textSize="16sp" />
+
+
+                    <com.mikhaellopez.circularimageview.CircularImageView
+                        android:id="@+id/avtProfile"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="41dp"
+                        android:layout_marginRight="41dp"
+                        android:src="@drawable/user_atvt" />
+
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/main_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/search"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/avtProfile"
+                        android:layout_centerHorizontal="true"
+                        android:clickable="true"
+                        android:src="@drawable/search_bg"
+                        />
+
+                    <ImageView
+                        android:id="@+id/covid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/search"
+                        android:layout_centerHorizontal="true"
+                        android:clickable="true"
+                        android:src="@drawable/covid" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="23dp"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/nunito_semibold"
+                            android:text="Recent visited Doctor"
+                            android:textColor="@color/black"
+                            android:textSize="17dp" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/see_more"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0"
+                            android:fontFamily="@font/nunito_semibold"
+                            android:text="See more"
+                            android:textColor="@color/black"
+                            android:textSize="14dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </FrameLayout>
+    </ScrollView>
+
+</RelativeLayout>

@@ -9,6 +9,8 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
@@ -28,7 +30,7 @@ import com.google.firebase.storage.StorageReference;
 
 public class UserProfileActivity extends AppCompatActivity {
     FirebaseStorage storage = FirebaseStorage.getInstance();
-
+    private boolean shouldExit = false;
     private ActivityUserProfileBinding binding;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
@@ -37,6 +39,8 @@ public class UserProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding= ActivityUserProfileBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
+        requestWindowFeature(Window.FEATURE_NO_TITLE); // hide the title
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(view);
         mAuth = FirebaseAuth.getInstance();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -82,7 +86,8 @@ public class UserProfileActivity extends AppCompatActivity {
         });
 
         binding.backBtn.setOnClickListener(view1 -> {
-            onBackPressed();
+            Intent intent = new Intent(this, HomePatientActivity.class);
+            startActivity(intent);
         });
 
         binding.signOutBtn.setOnClickListener(view1 -> {
@@ -131,6 +136,16 @@ public class UserProfileActivity extends AppCompatActivity {
                 }
                 );
 }
+    @Override
+    public void onBackPressed() {
+        if (shouldExit) { // shouldExit is a boolean flag to determine if the app should exit or not
+            super.onBackPressed();
+        } else {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            startActivity(intent);
+        }
+    }
 
 
 }

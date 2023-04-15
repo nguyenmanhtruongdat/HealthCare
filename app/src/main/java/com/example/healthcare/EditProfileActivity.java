@@ -8,6 +8,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -37,6 +39,8 @@ public class EditProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityEditProfileBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
+        requestWindowFeature(Window.FEATURE_NO_TITLE); // hide the title
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(view);
         String uid = FirebaseAuth.getInstance().getUid();
         Users user = (Users) getIntent().getSerializableExtra("user");
@@ -58,7 +62,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception exception) {
-                        // Handle any errors that occur during the download
+                        binding.avtProfile.setImageResource(R.drawable.defaul_avatar);
                     }
                 });
 
@@ -102,7 +106,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 }
             }
 
-            Users updatedUser = new Users(username, fullname, phone, email);
+            Users updatedUser = new Users(username, fullname, phone, email, "user");
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userId);
             databaseReference.setValue(updatedUser).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
@@ -114,16 +118,12 @@ public class EditProfileActivity extends AppCompatActivity {
             });
         });
 
-        binding.cancelBtn.setOnClickListener(view3->{
-            Intent intent = new Intent(EditProfileActivity.this, UserProfileActivity.class);
-            startActivity(intent);
+        binding.cancelBtn.setOnClickListener(view3 -> {
             finish();
         });
-        binding.backBtn.setOnClickListener(view4 ->{
-            Intent intent = new Intent(EditProfileActivity.this, UserProfileActivity.class);
-            startActivity(intent);
+        binding.backBtn.setOnClickListener(view4 -> {
             finish();
-        } );
+        });
 
 
         binding.avtProfile.setOnClickListener(view2 -> {
@@ -147,5 +147,11 @@ public class EditProfileActivity extends AppCompatActivity {
             imgUrl = data.getData();
             binding.avtProfile.setImageURI(imgUrl);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

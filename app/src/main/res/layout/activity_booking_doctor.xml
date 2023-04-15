@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".BookingDoctorActivity">
+
+    <com.shuhart.stepview.StepView
+        android:id="@+id/step_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        app:sv_animationType="Line"
+        app:sv_doneCircleColor="@color/appColor"
+        app:sv_doneCircleRadius="12dp"
+        app:sv_doneStepLineColor="@color/appColor"
+        app:sv_doneStepMarkColor="@color/yellow"
+        app:sv_nextStepLineColor="@color/appColor"
+        app:sv_nextTextColor="@color/appColor"
+        app:sv_selectedCircleColor="@color/appColor"
+        app:sv_selectedCircleRadius="12dp"
+        app:sv_selectedStepNumberColor="@color/yellow"
+        app:sv_selectedTextColor="@color/appColor"
+        app:sv_stepLineWidth="1dp"
+        app:sv_stepNumberTextSize="12sp"
+        app:sv_stepPadding="4dp"
+        app:sv_stepViewStyle="@style/StepView" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/layoutBtn"
+        android:layout_below="@id/step_view" />
+
+    <LinearLayout
+        android:id="@+id/layoutBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:padding="4dp"
+        android:weightSum="2">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/previous"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:drawableLeft="@drawable/baseline_arrow_back_ios_24"
+            android:text="Previous"
+            android:textColor="@color/appColor"
+            android:textSize="12dp"
+            app:cornerRadius="10dp"
+            app:strokeColor="@color/appColor"
+            app:strokeWidth="1dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:drawableLeft="@drawable/baseline_navigate_next_24"
+            android:text="NEXT       "
+            android:textColor="@color/appColor"
+            android:textSize="12dp"
+            app:cornerRadius="10dp"
+            app:strokeColor="@color/appColor"
+            app:strokeWidth="1dp" />
+
+    </LinearLayout>
+
+</RelativeLayout>
