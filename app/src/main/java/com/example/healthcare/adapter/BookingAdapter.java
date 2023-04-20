@@ -26,6 +26,10 @@ public class BookingAdapter extends FragmentPagerAdapter {
         }
         return null;
     }
+    public interface OnDoctorSelectedListener {
+        void onDoctorSelected(String doctorName, String doctorPhone, String doctorMajor);
+    }
+
 
     @Override
     public int getCount() {

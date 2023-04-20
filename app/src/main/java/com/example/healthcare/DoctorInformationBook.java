@@ -17,6 +17,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.healthcare.databinding.ActivityDoctorInformationBookBinding;
+import com.example.healthcare.model.SharedViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,17 +28,22 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.concurrent.atomic.AtomicReference;
+
 public class DoctorInformationBook extends AppCompatActivity {
     FirebaseStorage storage = FirebaseStorage.getInstance();
-    private String doctorUid="";
+    private String doctorUid = "";
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
     private DatabaseReference databaseReference;
     private ActivityDoctorInformationBookBinding binding;
+    private SharedViewModel sharedViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AtomicReference<Bundle> args = new AtomicReference<>(new Bundle());
         super.onCreate(savedInstanceState);
-        binding= ActivityDoctorInformationBookBinding.inflate(getLayoutInflater());
+        binding = ActivityDoctorInformationBookBinding.inflate(getLayoutInflater());
 
         requestWindowFeature(Window.FEATURE_NO_TITLE); // hide the title
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -82,7 +88,7 @@ public class DoctorInformationBook extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         String uid = mAuth.getCurrentUser().getUid();
         mDatabase = database.getReference("Doctors");
-        databaseReference= database.getReference("Doctors");
+        databaseReference = database.getReference("Doctors");
         // Get the Doctor object from the extras
         Doctors doctor = (Doctors) intent.getSerializableExtra("doctor");
         Query query = mDatabase.orderByChild("email").equalTo(doctor.getEmail());
@@ -101,7 +107,7 @@ public class DoctorInformationBook extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             // Extract the user's profile data and fill the respective TextViews
                             String major = snapshot.child("major").getValue(String.class);
-                            String email =doctor.getEmail().toString();
+                            String email = doctor.getEmail().toString();
                             String phone = snapshot.child("phoneNumber").getValue(String.class);
                             String fullName = snapshot.child("fullName").getValue(String.class);
                             String about = snapshot.child("about").getValue(String.class);
@@ -127,18 +133,20 @@ public class DoctorInformationBook extends AppCompatActivity {
             }
         });
         StorageReference profileImageRef = storage.getReference().child("profile_images/" + doctor.getEmail() + "_avatar.jpg");
-
+        profileImageRef.getDownloadUrl().addOnSuccessListener(uri -> {
+            String imageUrl = uri.toString();
+            args.set(new Bundle());
+            args.get().putString("img", imageUrl);
+        });
         final long ONE_MEGABYTE = 1024 * 1024;
-        profileImageRef .getBytes(ONE_MEGABYTE)
-                .addOnSuccessListener(bytes -> {
-                    // Create a Bitmap object from the byte array
-                    Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                    // Use the bitmap object to display the image in your app
-                    binding.avtProfile.setImageBitmap(bitmap);
-                })
-                .addOnFailureListener(exception -> {
-                    binding.avtProfile.setImageResource(R.drawable.defaul_avatar);
-                });
+        profileImageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(bytes -> {
+            // Create a Bitmap object from the byte array
+            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+            // Use the bitmap object to display the image in your app
+            binding.avtProfile.setImageBitmap(bitmap);
+        }).addOnFailureListener(exception -> {
+            binding.avtProfile.setImageResource(R.drawable.defaul_avatar);
+        });
 
 
         mDatabase.addValueEventListener(new ValueEventListener() {
@@ -146,7 +154,7 @@ public class DoctorInformationBook extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 // Extract the user's profile data and fill the respective TextViews
                 String major = snapshot.child("major").getValue(String.class);
-                String email =doctor.getEmail().toString();
+                String email = doctor.getEmail().toString();
                 String phone = snapshot.child("phoneNumber").getValue(String.class);
                 String fullName = snapshot.child("fullName").getValue(String.class);
                 String about = snapshot.child("about").getValue(String.class);
@@ -165,14 +173,27 @@ public class DoctorInformationBook extends AppCompatActivity {
         });
 
         binding.bookingDoctor.setOnClickListener(view -> {
-            Intent intent1 = new Intent(DoctorInformationBook.this, BookingDoctorActivity.class);
-            intent1.putExtra("doctor", doctor);
+            Intent intent1 = new Intent(this, BookingDoctorActivity.class);
+
+            // Put data to pass to the BookingStep1Fragment
+            args.get().putString("doctorName", binding.doctorName.getText().toString());
+            args.get().putString("doctorPhone", binding.doctorPhone.getText().toString());
+            args.get().putString("doctorMajor", binding.doctorMajor.getText().toString());
+            args.get().putString("doctorEmail", binding.doctorEmail.getText().toString());
+
+            intent1.putExtra("data", args.get());
+
+            Log.d("BookingDoctorActivity", "Doctor name: " + binding.doctorName.getText().toString());
+            Log.d("BookingDoctorActivity", "Doctor phone: " + binding.doctorPhone.getText().toString());
+            Log.d("BookingDoctorActivity", "Doctor major: " + binding.doctorMajor.getText().toString());
+
+            // Start the BookingDoctorActivity
             startActivity(intent1);
-            finish();
         });
 
 
     }
+
     public void onBackPressed() {
         Intent intent = new Intent(this, SearchPatActivity.class);
         startActivity(intent);

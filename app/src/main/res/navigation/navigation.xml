@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/bookingStep1Fragment">
+
+    <fragment
+        android:id="@+id/bookingStep1Fragment"
+        android:name="com.example.healthcare.fragment.BookingStep1Fragment"
+        android:label="fragment_booking_step1"
+        tools:layout="@layout/fragment_booking_step1" >
+        <action
+            android:id="@+id/action_bookingStep1Fragment_to_searchPatActivity"
+            app:destination="@id/searchPatActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/searchPatActivity"
+        android:name="com.example.healthcare.SearchPatActivity"
+        android:label="activity_search_pat"
+        tools:layout="@layout/activity_search_pat" />
+</navigation>

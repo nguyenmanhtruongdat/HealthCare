@@ -12,6 +12,8 @@
         <item name="colorAccent">@color/colorAccent</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:datePickerDialogTheme">@style/MyDatePickerDialogTheme</item>
+
         <!-- Customize your theme here. -->
     </style>
 
@@ -51,5 +53,15 @@
         <item name="android:windowExitAnimation">@anim/side_out</item>
         
     </style>
+    <style name="MyDatePickerDialogTheme" parent="Theme.MaterialComponents.Light.Dialog">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@color/appColor</item>
+        <item name="android:textColorPrimary">@color/appColor</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorSecondary">@color/appColor</item>
+    </style>
+
+
 
 </resources>
