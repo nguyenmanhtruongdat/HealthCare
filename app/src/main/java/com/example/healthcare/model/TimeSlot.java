@@ -1,13 +1,27 @@
 package com.example.healthcare.model;
 
 public class TimeSlot {
-    private Long slot;
+    private String startTime;
+    private boolean isAvailable;
 
-    public Long getSlot() {
-        return slot;
+    public TimeSlot(String startTime, boolean isAvailable) {
+        this.startTime = startTime;
+        this.isAvailable = isAvailable;
     }
 
-    public void setSlot(Long slot) {
-        this.slot = slot;
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    public void setAvailable(boolean available) {
+        isAvailable = available;
     }
 }

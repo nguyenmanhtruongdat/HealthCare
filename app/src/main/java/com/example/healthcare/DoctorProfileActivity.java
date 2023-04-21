@@ -45,7 +45,9 @@ public class DoctorProfileActivity extends AppCompatActivity {
         mDatabase = database.getReference("Doctors");
         FirebaseUser user = mAuth.getCurrentUser();
         String uid = user.getUid();
-        DatabaseReference userRef = mDatabase.child(uid);
+        String[] parts = user.getEmail().split("@");
+        String doctorEmail = parts[0];
+        DatabaseReference userRef = mDatabase.child(doctorEmail);
         StorageReference profileImageRef = storage.getReference().child("profile_images/" + user.getEmail() + "_avatar.jpg");
 
         final long ONE_MEGABYTE = 1024 * 1024;

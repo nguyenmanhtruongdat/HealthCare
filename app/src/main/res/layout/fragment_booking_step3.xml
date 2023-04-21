@@ -7,17 +7,28 @@
     android:orientation="vertical"
     android:padding="8dp">
 
-    <CalendarView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/calendarView"
-        android:background="@color/colorPrimary"
-        app:textColorSelected="#FFFF"/>
+<TextView
+    android:id="@+id/calendar"
+    android:layout_width="match_parent"
+    android:layout_height="30dp"
+    android:background="@color/appColor"
+    android:textColor="@color/white"
+    android:text="23/04/2023"
+    android:fontFamily="@font/nunito_semibold"
+    android:textSize="20sp"
+    android:gravity="center_horizontal"
+    />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:id="@+id/recycle_time_slot"
-        android:layout_marginTop="4dp"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="16dp"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="3" />
+
 
 </LinearLayout>

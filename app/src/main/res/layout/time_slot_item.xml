@@ -1,14 +1,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
+    android:orientation="vertical"
+    android:background="@drawable/time_slot_item_bg"
     android:padding="16dp">
 
     <TextView
         android:id="@+id/timeTextView"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textSize="18sp" />
+        android:fontFamily="@font/nunito_semibold"
+        android:gravity="center_horizontal"
+        android:text="9h"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/timeTextAvailable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="@font/nunito_semibold"
+        android:gravity="center_horizontal"
+        android:text="Available"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
 
 </LinearLayout>

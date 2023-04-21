@@ -73,7 +73,7 @@ public class DoctorEditProfileActivity extends AppCompatActivity {
 
             String userId = FirebaseAuth.getInstance().getUid();
             String[] parts = doctors.getEmail().split("@");
-            String username = parts[0];
+            String doctorEmail = parts[0];
             profileImageRef = storage.getReference().child("profile_images/" + doctors.getEmail() + "_avatar.jpg");
 
             if (imgUrl != null) {
@@ -100,7 +100,7 @@ public class DoctorEditProfileActivity extends AppCompatActivity {
             String phoneNumber = binding.phoneNumber.getText().toString().trim();
             String about= binding.about.getText().toString().trim();
             Doctors updatedDoctors = new Doctors(fullName, email, phoneNumber, major, about, "doctor");
-            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Doctors").child(userId);
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Doctors").child(doctorEmail);
             databaseReference.setValue(updatedDoctors).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     Toast.makeText(DoctorEditProfileActivity.this, "Profile updated successfully", Toast.LENGTH_SHORT).show();

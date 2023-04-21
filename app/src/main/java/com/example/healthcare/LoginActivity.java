@@ -54,8 +54,11 @@ public class LoginActivity extends AppCompatActivity {
                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                             if (user != null) {
                                 String uid = user.getUid();
+                                String email = user.getEmail();
+                                String[] parts = email.split("@");
+                                String doctorEmail = parts[0];
                                 DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("Users").child(uid);
-                                DatabaseReference doctorsRef = FirebaseDatabase.getInstance().getReference("Doctors").child(uid);
+                                DatabaseReference doctorsRef = FirebaseDatabase.getInstance().getReference("Doctors").child(doctorEmail);
                                 ValueEventListener valueEventListener = new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {

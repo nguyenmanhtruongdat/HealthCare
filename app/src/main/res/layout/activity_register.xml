@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RegisterActivity"
-    android:background="@drawable/back_sign_in">
+    android:background="@drawable/back_sign_in_1">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -41,6 +41,7 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
                 android:hint="Username"
+
                 android:textColorHint="@color/white"
                 app:boxBackgroundColor="@color/mycolor"
                 app:boxBackgroundMode="outline"
@@ -239,17 +240,20 @@
                 android:fontFamily="@font/nunito_semibold"
                 android:text="Sign Up" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/or"
-                android:layout_below="@id/registerBtn"
-                android:text="or"
-                android:textSize="18dp"
-                android:textColor="@color/white"
-                android:layout_centerHorizontal="true"
-                android:fontFamily="@font/nunito_semibold"
-                android:layout_margin="0dp"/>
+<!--            <TextView-->
+<!--                android:id="@+id/or"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@id/registerBtn"-->
+<!--                android:layout_centerHorizontal="true"-->
+<!--                android:layout_marginStart="0dp"-->
+<!--                android:layout_marginTop="0dp"-->
+<!--                android:layout_marginEnd="0dp"-->
+<!--                android:layout_marginBottom="0dp"-->
+<!--                android:fontFamily="@font/nunito_semibold"-->
+<!--                android:text="or"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="18dp" />-->
 
             <!--    <LinearLayout-->
             <!--        android:layout_width="match_parent"-->
