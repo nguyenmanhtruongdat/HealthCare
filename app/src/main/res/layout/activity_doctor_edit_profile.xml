@@ -8,13 +8,12 @@
     tools:context=".DoctorEditProfileActivity">
 
     <LinearLayout
+        android:id="@+id/ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:orientation="horizontal"
         android:background="@color/appColor"
-        android:id="@+id/ll"
-        >
+        android:orientation="horizontal"
+        android:padding="10dp">
 
         <ImageView
             android:id="@+id/backBtn"
@@ -23,16 +22,16 @@
             android:layout_alignParentLeft="true"
             android:background="@drawable/baseline_arrow_back_24"
             android:onClick="onBackPressed" />
+
         <TextView
-            android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Edit profile"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            android:textColor="@color/white"
+            android:layout_weight="1"
             android:gravity="center"
-            />
+            android:text="Edit profile"
+            android:textColor="@color/white"
+            android:textSize="18dp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/signOutBtn"
@@ -76,84 +75,91 @@
             android:layout_marginTop="10dp"
             android:background="@color/appColor" />
     </LinearLayout>
+
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout0"
+        style="@style/LoginTextInputLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        app:startIconDrawable="@drawable/baseline_person_24"
-        app:startIconTint="@color/appColor"
-        app:boxBackgroundMode="outline"
-        app:boxBackgroundColor="@color/mycolor"
         android:hint="Full name"
         android:textColorHint="@color/gray"
-        android:id="@+id/textInputLayout0"
-        style="@style/LoginTextInputLayoutStyle">
+        app:boxBackgroundColor="@color/mycolor"
+        app:boxBackgroundMode="outline"
+        app:startIconDrawable="@drawable/baseline_person_24"
+        app:startIconTint="@color/appColor">
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/fullameed"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColor="@color/gray"
             android:fontFamily="@font/nunito"
-            android:inputType="text">
+            android:inputType="text"
+            android:textColor="@color/gray">
 
         </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
+
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout3"
+        style="@style/LoginTextInputLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        app:startIconDrawable="@drawable/baseline_local_phone_24"
-        app:startIconTint="@color/appColor"
-        app:boxBackgroundMode="outline"
-        app:boxBackgroundColor="@color/mycolor"
         android:hint="Phone number"
         android:textColorHint="@color/gray"
-        android:id="@+id/textInputLayout3"
-        style="@style/LoginTextInputLayoutStyle">
+        app:boxBackgroundColor="@color/mycolor"
+        app:boxBackgroundMode="outline"
+        app:startIconDrawable="@drawable/baseline_local_phone_24"
+        app:startIconTint="@color/appColor">
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/phoneNumber"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColor="@color/gray"
             android:fontFamily="@font/nunito"
-            android:inputType="text">
+            android:inputType="text"
+            android:textColor="@color/gray">
 
         </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
+
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout2"
+        style="@style/LoginTextInputLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        app:startIconDrawable="@drawable/ic_email_black_24dp"
-        app:startIconTint="@color/appColor"
-        app:boxBackgroundMode="outline"
-        app:boxBackgroundColor="@color/mycolor"
         android:hint="Email"
         android:textColorHint="@color/gray"
-        android:id="@+id/textInputLayout2"
-        style="@style/LoginTextInputLayoutStyle">
+        app:boxBackgroundColor="@color/mycolor"
+        app:boxBackgroundMode="outline"
+        app:startIconDrawable="@drawable/ic_email_black_24dp"
+        app:startIconTint="@color/appColor">
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColor="@color/gray"
             android:fontFamily="@font/nunito"
-            android:inputType="text">
+            android:inputType="text"
+            android:textColor="@color/gray">
 
         </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
+
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout4"
+        style="@style/LoginTextInputLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        app:startIconDrawable="@drawable/baseline_menu_24_green"
-        app:startIconTint="@color/appColor"
-        app:boxBackgroundMode="outline"
-        app:boxBackgroundColor="@color/mycolor"
         android:hint="Major"
         android:textColorHint="@color/gray"
-        android:id="@+id/textInputLayout4"
-        style="@style/LoginTextInputLayoutStyle">
+        app:boxBackgroundColor="@color/mycolor"
+        app:boxBackgroundMode="outline"
+        app:startIconDrawable="@drawable/baseline_menu_24_green"
+        app:startIconTint="@color/appColor">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/major"
@@ -167,17 +173,17 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout5"
+        style="@style/LoginTextInputLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        app:startIconDrawable="@drawable/baseline_info_24"
-        app:startIconTint="@color/appColor"
-        app:boxBackgroundMode="outline"
-        app:boxBackgroundColor="@color/mycolor"
         android:hint="About your self"
         android:textColorHint="@color/gray"
-        android:id="@+id/textInputLayout5"
-        style="@style/LoginTextInputLayoutStyle">
+        app:boxBackgroundColor="@color/mycolor"
+        app:boxBackgroundMode="outline"
+        app:startIconDrawable="@drawable/baseline_info_24"
+        app:startIconTint="@color/appColor">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/about"
@@ -204,9 +210,11 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:backgroundTint="@color/appColor"
             android:drawableLeft="@drawable/baseline_save_24"
+            android:drawableTint="@color/white"
             android:text=" SAVE    "
-            android:textColor="@color/appColor"
+            android:textColor="@color/white"
             android:textSize="12dp"
             app:cornerRadius="10dp"
             app:strokeColor="@color/appColor"
@@ -218,9 +226,11 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:backgroundTint="@color/errorColor"
             android:drawableLeft="@drawable/baseline_arrow_back_24_red"
+            android:drawableTint="@color/white"
             android:text="CANCEL"
-            android:textColor="@color/red"
+            android:textColor="@color/white"
             android:textSize="12dp"
             app:cornerRadius="10dp"
             app:strokeColor="@color/red"

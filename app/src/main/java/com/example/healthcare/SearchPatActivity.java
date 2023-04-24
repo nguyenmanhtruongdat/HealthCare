@@ -38,7 +38,7 @@ public class SearchPatActivity extends AppCompatActivity implements MainAdapter.
                 new FirebaseRecyclerOptions.Builder<Doctors>()
                         .setQuery(FirebaseDatabase.getInstance().getReference().child("Doctors"), Doctors.class)
                         .build();
-        mainAdapter=new MainAdapter(options, this, SearchPatActivity.this);
+        mainAdapter = new MainAdapter(options, this, SearchPatActivity.this);
         binding.resultList.setAdapter(mainAdapter);
 
         binding.search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -75,7 +75,7 @@ public class SearchPatActivity extends AppCompatActivity implements MainAdapter.
         binding.search.setQuery(searchViewText, false);
     }
 
-    public void txtSearch(String string){
+    public void txtSearch(String string) {
         FirebaseRecyclerOptions<Doctors> options =
                 new FirebaseRecyclerOptions.Builder<Doctors>()
                         .setQuery(FirebaseDatabase.getInstance().getReference().child("Doctors").orderByChild("fullName").startAt(string).endAt(string + "\uf8ff"), Doctors.class)
@@ -88,7 +88,7 @@ public class SearchPatActivity extends AppCompatActivity implements MainAdapter.
             Log.d("SearchPatActivity", "recyclerView is null");
         }
         FirebaseDatabase.getInstance().getReference().child("Doctors")
-                .orderByChild("fullName").startAt(string).endAt(string+"~")
+                .orderByChild("fullName").startAt(string).endAt(string + "~")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -97,6 +97,7 @@ public class SearchPatActivity extends AppCompatActivity implements MainAdapter.
                             Log.d("SearchPatActivity", "query result: " + child.getValue());
                         }
                     }
+
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
                         Log.e("SearchPatActivity", "query cancelled", error.toException());
@@ -123,11 +124,11 @@ public class SearchPatActivity extends AppCompatActivity implements MainAdapter.
     public void onItemClick(Doctors doctor) {
         Intent intent = new Intent(this, DoctorInformationBook.class);
         intent.putExtra("doctor", doctor);
-        Log.d("Bac si: ", doctor.getFullName()+" va "+doctor.getEmail());
+        Log.d("Bac si: ", doctor.getFullName() + " va " + doctor.getEmail());
         startActivity(intent);
     }
 
-    public void onBackPressed(){
+    public void onBackPressed() {
         super.onBackPressed();
         finish();
     }

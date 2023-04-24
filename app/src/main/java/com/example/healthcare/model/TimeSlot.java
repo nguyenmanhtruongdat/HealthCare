@@ -4,9 +4,26 @@ public class TimeSlot {
     private String startTime;
     private boolean isAvailable;
 
-    public TimeSlot(String startTime, boolean isAvailable) {
+    private boolean isSelected;
+
+
+    public TimeSlot(String startTime, boolean isAvailable, boolean isSelected) {
         this.startTime = startTime;
         this.isAvailable = isAvailable;
+        this.isSelected = isSelected;
+    }
+
+    public TimeSlot(String startTime, boolean isAvailable) {
+        this.startTime=startTime;
+        this.isAvailable=isAvailable;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 
     public String getStartTime() {

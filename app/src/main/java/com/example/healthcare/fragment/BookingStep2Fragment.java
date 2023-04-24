@@ -6,9 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -17,11 +15,12 @@ import com.example.healthcare.R;
 import com.example.healthcare.databinding.FragmentBookingStep2Binding;
 import com.example.healthcare.model.BookingDoctorInformation;
 import com.example.healthcare.model.SharedViewModel;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.Calendar;
 
@@ -29,8 +28,13 @@ import java.util.Calendar;
 public class BookingStep2Fragment extends Fragment {
     static BookingStep2Fragment instance;
     private FragmentBookingStep2Binding binding;
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+    String userId = currentUser.getUid();
 
+
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    StorageReference profileImageRef;
+    FirebaseStorage storage = FirebaseStorage.getInstance();
     public static BookingStep2Fragment getInstance() {
         if (instance == null) {
             instance = new BookingStep2Fragment();
@@ -68,41 +72,74 @@ public class BookingStep2Fragment extends Fragment {
             DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), R.style.MyDatePickerDialogTheme,
                     (datePicker, year, month, day) -> {
                         // Set selected date to text input field
-                        String selectedDate = day + "/" + (month + 1) + "/" + year; // Note that month starts from 0
+                        String selectedDate = day + "/" + "0" + (month + 1) + "/" + year; // Note that month starts from 0
                         binding.dateOfBirth.setText(selectedDate);
                     },
                     currentYear, currentMonth, currentDay);
 
-            // Show date picker dialog
+            // Set custom style for buttons
             datePickerDialog.show();
+            datePickerDialog.setButton(DatePickerDialog.BUTTON_POSITIVE, "OK", datePickerDialog);
+            datePickerDialog.setButton(DatePickerDialog.BUTTON_NEGATIVE, "Cancel", datePickerDialog);
+            datePickerDialog.getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.colorAccent));
+            datePickerDialog.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.colorAccent));
+
+            // Show date picker dialog
         });
+
 
         DatabaseReference bookingsRef = database.getReference("Bookings");
         SharedViewModel sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+        DatabaseReference doctorRef = database.getReference("Doctors");
 
 
-              binding.send.setOnClickListener(view -> {
-                  BookingDoctorInformation information = new ViewModelProvider(this).get(BookingDoctorInformation.class);
-                  information.setDoctorEmail(sharedViewModel.getDoctorEmail().getValue());
-                  information.setAccept(0);
-                  information.setDoctorMajor(sharedViewModel.getDoctorMajor().getValue());
-                  information.setDate(binding.dateOfBirth.getText().toString());
-                  information.setUserEmail(binding.email.getText().toString());
-                  Log.d("Step2", binding.email.getText().toString());
-                  Log.d("Step2", binding.dateOfBirth.getText().toString());
-            //bookingsRef.push().setValue(infor);
-            bookingsRef.child(FirebaseAuth.getInstance().getUid()).setValue(information).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(getContext(), "Successfully Updated", Toast.LENGTH_SHORT).show();
-                        ((BookingDoctorActivity) getActivity()).onNext();
+        binding.send.setOnClickListener(view -> {
 
-                    }
-                    if (!task.isSuccessful()) {
-                        Toast.makeText(getContext(), "Updated Failed", Toast.LENGTH_SHORT).show();
+            String email = sharedViewModel.getDoctorEmail().getValue();
+            String accept = "pending";
+            String drMajor = sharedViewModel.getDoctorMajor().getValue();
+            String drName = sharedViewModel.getDoctorName().getValue();
+            String dob = binding.dateOfBirth.getText().toString();
+            String userEmail = binding.email.getText().toString();
+            String userName = binding.fullname.getText().toString();
+            String userPhone = binding.phoneNumber.getText().toString();
 
-                    }
+            BookingDoctorInformation information = new BookingDoctorInformation(userName, userEmail, userPhone, dob, drName, email, drMajor, "", "",accept, userId);
+            information.setUserName(binding.fullname.getText().toString());
+            information.setUserEmail(binding.email.getText().toString());
+            information.setUserPhone(binding.phoneNumber.getText().toString());
+            information.setDateOfBirth(binding.dateOfBirth.getText().toString());
+            information.setDoctorName(drName);
+            information.setDoctorEmail(email);
+            information.setDoctorMajor(drMajor);
+            information.setUserID(userId);
+
+            Log.d("Step2", information.getDoctorEmail());
+            Log.d("Step2", binding.dateOfBirth.getText().toString());
+            String drEmail = information.getDoctorEmail().split("@")[0];
+
+
+
+            doctorRef.child(drEmail).child("appointments").child("appoint_"+FirebaseAuth.getInstance().getUid()).setValue(information).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Log.d("appointments", "Add appointment");
+
+                }
+                if (!task.isSuccessful()) {
+
+                }
+            });
+
+
+            bookingsRef.child(FirebaseAuth.getInstance().getUid()).child("appoint_"+drEmail).setValue(information).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+//                        Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
+                    ((BookingDoctorActivity) getActivity()).onNext();
+
+                }
+                if (!task.isSuccessful()) {
+//                        Toast.makeText(getContext(), "Updated Failed", Toast.LENGTH_SHORT).show();
+
                 }
             });
         });

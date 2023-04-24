@@ -34,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     boolean passwordVisible;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -45,12 +46,16 @@ public class LoginActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE); // hide the title
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(view);
-
+        binding.loginProgressBar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_bg));
         binding.loginBtn.setOnClickListener(view1 -> {
+
+            binding.loginProgressBar.setVisibility(View.VISIBLE);
+
 
             mAuth.signInWithEmailAndPassword(binding.email.getText().toString().trim(), binding.password.getText().toString().trim())
                     .addOnCompleteListener(this, task -> {
                         if (task.isSuccessful()) {
+                            binding.loginProgressBar.setVisibility(View.GONE);
                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                             if (user != null) {
                                 String uid = user.getUid();
@@ -101,6 +106,8 @@ public class LoginActivity extends AppCompatActivity {
 
                             // Sign in success, update UI with the signed-in user's information
                         } else {
+                            binding.loginProgressBar.setVisibility(View.GONE);
+
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
@@ -127,19 +134,18 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     String email = emailBox.getText().toString().trim();
-                    if (TextUtils.isEmpty(email) && !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                        Toast.makeText(LoginActivity.this,"Enter your email", Toast.LENGTH_SHORT).show();
+                    if (TextUtils.isEmpty(email) && !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                        Toast.makeText(LoginActivity.this, "Enter your email", Toast.LENGTH_SHORT).show();
                         return;
                     }
                     mAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful())
-                            {
+                            if (task.isSuccessful()) {
                                 Toast.makeText(LoginActivity.this, "Check your email for reset link !", Toast.LENGTH_SHORT).show();
                                 dialog.dismiss();
 
-                            }else {
+                            } else {
                                 Toast.makeText(LoginActivity.this, "Send failed", Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -152,7 +158,7 @@ public class LoginActivity extends AppCompatActivity {
                     dialog.dismiss();
                 }
             });
-            if (dialog.getWindow()!=null){
+            if (dialog.getWindow() != null) {
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
             }
             dialog.show();

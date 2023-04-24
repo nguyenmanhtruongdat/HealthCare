@@ -1,16 +1,276 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".fragment.BookingStep4Fragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="STEP 4"
-        android:textSize="30dp" />
 
-</RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Check information again"
+    android:gravity="center_horizontal"
+    android:fontFamily="@font/nunito_bold"
+    android:textColor="@color/appColor"
+    android:textSize="25sp"
+    />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/nunito_semibold"
+                android:text="Fullname"
+                android:textColor="@color/appColor"
+                android:textSize="16dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout0"
+                style="@style/LoginTextInputLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:textColorHint="@color/gray"
+                app:boxBackgroundColor="@color/mycolor"
+                app:boxBackgroundMode="outline"
+                app:startIconDrawable="@drawable/baseline_person_24"
+                app:startIconTint="@color/appColor">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/fullNamePatient"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/nunito"
+                    android:inputType="text"
+                    android:textColor="@color/gray">
+
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/nunito_semibold"
+                android:text="Email"
+                android:textColor="@color/appColor"
+                android:textSize="16dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout2"
+                style="@style/LoginTextInputLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:textColorHint="@color/gray"
+                app:boxBackgroundColor="@color/mycolor"
+                app:boxBackgroundMode="outline"
+                app:startIconDrawable="@drawable/ic_email_black_24dp"
+                app:startIconTint="@color/appColor">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/emailPatient"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/nunito"
+                    android:inputType="text"
+                    android:textColor="@color/gray">
+
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/nunito_semibold"
+                android:text="Phone number"
+                android:textColor="@color/appColor"
+                android:textSize="16dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout3"
+                style="@style/LoginTextInputLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:textColorHint="@color/gray"
+                app:boxBackgroundColor="@color/mycolor"
+                app:boxBackgroundMode="outline"
+                app:startIconDrawable="@drawable/baseline_local_phone_24"
+                app:startIconTint="@color/appColor">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/phoneNumberPatient"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/nunito"
+                    android:inputType="text"
+                    android:textColor="@color/gray">
+
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/nunito_semibold"
+                android:text="Date of birth"
+                android:textColor="@color/appColor"
+                android:textSize="16dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout6"
+                style="@style/LoginTextInputLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:textColorHint="@color/gray"
+                app:boxBackgroundColor="@color/mycolor"
+                app:boxBackgroundMode="outline"
+                app:startIconDrawable="@drawable/baseline_calendar_month_24"
+                app:startIconTint="@color/appColor">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/date_of_birth"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="none"
+                    android:focusable="false"
+                    android:fontFamily="@font/nunito"
+                    android:textColor="@color/gray" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/nunito_semibold"
+                android:text="Doctor name"
+                android:textColor="@color/appColor"
+                android:textSize="16dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout4"
+                style="@style/LoginTextInputLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:textColorHint="@color/gray"
+                app:boxBackgroundColor="@color/mycolor"
+                app:boxBackgroundMode="outline"
+                app:startIconDrawable="@drawable/baseline_person_24"
+                app:startIconTint="@color/appColor">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/doctorName"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/nunito"
+                    android:inputType="text"
+                    android:textColor="@color/gray"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/nunito_semibold"
+                android:text="Doctor email"
+                android:textColor="@color/appColor"
+                android:textSize="16dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout5"
+                style="@style/LoginTextInputLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:textColorHint="@color/gray"
+                app:boxBackgroundColor="@color/mycolor"
+                app:boxBackgroundMode="outline"
+                app:startIconDrawable="@drawable/baseline_email_24"
+                app:startIconTint="@color/appColor">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/doctorEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/nunito"
+                    android:inputType="text"
+                    android:textColor="@color/gray" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/nunito_semibold"
+                android:text="Time slot"
+                android:textColor="@color/appColor"
+                android:textSize="16dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout7"
+                style="@style/LoginTextInputLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:textColorHint="@color/gray"
+                app:boxBackgroundColor="@color/mycolor"
+                app:boxBackgroundMode="outline"
+                app:startIconDrawable="@drawable/baseline_calendar_month_24"
+                app:startIconTint="@color/appColor">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/timeSlot"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/nunito"
+                    android:inputType="text"
+                    android:textColor="@color/gray" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/send"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/appColor"
+                    app:cornerRadius="10dp"
+                    android:text="Confirm"/>
+
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+</LinearLayout>

@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.healthcare.databinding.FragmentBookingStep1Binding;
+import com.example.healthcare.model.BookingDoctorInformation;
 import com.example.healthcare.model.SharedViewModel;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -21,6 +22,7 @@ public class BookingStep1Fragment extends Fragment {
     private DatabaseReference databaseReference;
     static BookingStep1Fragment instance;
     private SharedViewModel sharedViewModel;
+    private  BookingDoctorInformation bookingDoctorInformation;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     ;
 

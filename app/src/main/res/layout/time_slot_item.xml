@@ -2,8 +2,10 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@drawable/time_slot_item_bg"
-    android:padding="16dp">
+    android:id="@+id/card_time_slot"
+    android:background="@drawable/time_slot_bg"
+    android:padding="14dp"
+    android:layout_margin="3dp">
 
     <TextView
         android:id="@+id/timeTextView"

@@ -13,9 +13,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthCare"
         tools:targetApi="31">
-<!--        <activity-->
-<!--            android:name=".LoginSplashActivity"-->
-<!--            android:exported="false" />-->
+        <activity
+            android:name=".AppointmentDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AppointmentRequestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AppointmentRequiredActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BookSuccessActivity"
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".LoginSplashActivity" -->
+        <!-- android:exported="false" /> -->
         <!-- <activity -->
         <!-- android:name=".SplashActivity" -->
         <!-- android:exported="false" /> -->
@@ -56,25 +67,13 @@
             android:name=".EditProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".UserProfileActivity"
-            android:exported="false" />
-        <activity
             android:name=".HomePatientActivity"
             android:exported="false" />
         <activity
             android:name=".DoctorHomeActivity"
             android:exported="false" />
         <activity
-            android:name=".activity_doctor_appointement"
-            android:exported="false" />
-        <activity
-            android:name=".activity_confirmed_appointements"
-            android:exported="false" />
-        <activity
             android:name=".ChatActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ActivityApoitment"
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"
@@ -93,7 +92,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <service
+            android:name=".MyFirebaseInstanceIDService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

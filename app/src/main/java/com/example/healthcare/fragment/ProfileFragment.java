@@ -66,7 +66,7 @@ public class ProfileFragment extends Fragment {
 
         binding.editProfileBtn.setOnClickListener(view2 -> {
             // Get a reference to the user's data in the Firebase Realtime Database
-            Users users = new Users(binding.username.getText().toString(),binding.fullname.getText().toString(),binding.phoneNumber.getText().toString(),binding.email.getText().toString());
+            Users users = new Users(binding.username.getText().toString(),binding.fullName.getText().toString(),binding.phoneNumber.getText().toString(),binding.email.getText().toString());
 
             // Pass the user data to the EditProfileActivity
             Intent intent = new Intent(getContext(), EditProfileActivity.class);
@@ -98,7 +98,7 @@ public class ProfileFragment extends Fragment {
                 String email = user.getEmail().toString();
                 String phone = snapshot.child("phoneNumber").getValue(String.class);
                 String fullName = snapshot.child("fullName").getValue(String.class);
-                binding.fullname.setText(fullName);
+                binding.fullName.setText(fullName);
                 binding.username.setText(username);
                 binding.email.setText(email);
                 binding.phoneNumber.setText(phone);

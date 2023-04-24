@@ -145,10 +145,6 @@ public class HomePatientActivity extends AppCompatActivity implements Navigation
                         String fullName = snapshot.child("fullName").getValue(String.class);
                         //binding.welcomeText.setText("Welcome " + fullName + "!");
 
-                        String logData = snapshot.child("logData").getValue(String.class);
-                        Intent intent = new Intent(HomePatientActivity.this, UserProfileActivity.class);
-                        intent.putExtra("logData", logData);
-                        //startActivity(intent);
                     }
                 }
 

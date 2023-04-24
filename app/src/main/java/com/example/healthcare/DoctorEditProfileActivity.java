@@ -16,11 +16,18 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.healthcare.databinding.ActivityDoctorEditProfileBinding;
+import com.example.healthcare.fragment.DoctorProfileFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 public class DoctorEditProfileActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
@@ -29,10 +36,11 @@ public class DoctorEditProfileActivity extends AppCompatActivity {
     FirebaseStorage storage = FirebaseStorage.getInstance();
     private ActivityDoctorEditProfileBinding binding;
     Uri imgUrl;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding= ActivityDoctorEditProfileBinding.inflate(getLayoutInflater());
+        binding = ActivityDoctorEditProfileBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         requestWindowFeature(Window.FEATURE_NO_TITLE); // hide the title
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -40,7 +48,7 @@ public class DoctorEditProfileActivity extends AppCompatActivity {
 
 
         String uid = FirebaseAuth.getInstance().getUid();
-        Doctors doctors= (Doctors) getIntent().getSerializableExtra("doctor");
+        Doctors doctors = (Doctors) getIntent().getSerializableExtra("doctor");
         Log.d("Check: ", "fullname: " + doctors.getFullName().toString());
         Log.d("Check: ", "email:" + doctors.getEmail().toString());
 //        Log.d("Check: ", "about: " + doctors.getAbout().toString());
@@ -98,11 +106,21 @@ public class DoctorEditProfileActivity extends AppCompatActivity {
             String major = binding.major.getText().toString().trim();
             String email = binding.email.getText().toString().trim();
             String phoneNumber = binding.phoneNumber.getText().toString().trim();
-            String about= binding.about.getText().toString().trim();
+            String about = binding.about.getText().toString().trim();
             Doctors updatedDoctors = new Doctors(fullName, email, phoneNumber, major, about, "doctor");
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Doctors").child(doctorEmail);
             databaseReference.setValue(updatedDoctors).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
+
+                    DatabaseReference availabilityRef = FirebaseDatabase.getInstance().getReference("Doctors").child(doctorEmail).child("availability");
+                    Calendar calendar = Calendar.getInstance();
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+                    for (int i = 0; i < 7; i++) {
+                        calendar.add(Calendar.DATE, 1);
+                        String date = dateFormat.format(calendar.getTime());
+                        availabilityRef.child(date).setValue(getDefaultAvailability());
+                    }
+
                     Toast.makeText(DoctorEditProfileActivity.this, "Profile updated successfully", Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
@@ -111,21 +129,37 @@ public class DoctorEditProfileActivity extends AppCompatActivity {
             });
         });
 
-        binding.cancelBtn.setOnClickListener(view3->{
-            Intent intent = new Intent(DoctorEditProfileActivity.this, DoctorProfileActivity.class);
+        binding.cancelBtn.setOnClickListener(view3 -> {
+            Intent intent = new Intent(DoctorEditProfileActivity.this, DoctorProfileFragment.class);
             startActivity(intent);
             finish();
         });
-        binding.backBtn.setOnClickListener(view4 ->{
-            Intent intent = new Intent(DoctorEditProfileActivity.this, DoctorProfileActivity.class);
+        binding.backBtn.setOnClickListener(view4 -> {
+            Intent intent = new Intent(DoctorEditProfileActivity.this, DoctorProfileFragment.class);
             startActivity(intent);
             finish();
-        } );
+        });
         binding.avtProfile.setOnClickListener(view2 -> {
                     selectImage();
                 }
         );
     }
+
+    private Map<String, Map<String, Boolean>> getDefaultAvailability() {
+        // Set the default availability for a day as available for all time slots
+        Map<String, Map<String, Boolean>> availability = new HashMap<>();
+        for (int i = 7; i < 17; i++) {
+            Map<String, Boolean> timeSlot1 = new HashMap<>();
+            timeSlot1.put("available", true);
+            availability.put(i + ":00-" + i + ":30", timeSlot1);
+
+            Map<String, Boolean> timeSlot2 = new HashMap<>();
+            timeSlot2.put("available", true);
+            availability.put(i + ":30-" + (i + 1) + ":00", timeSlot2);
+        }
+        return availability;
+    }
+
 
     private void selectImage() {
         Intent intent = new Intent();

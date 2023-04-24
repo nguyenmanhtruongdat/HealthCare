@@ -39,7 +39,7 @@
         app:startIconTint="@color/appColor">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/fullameed"
+            android:id="@+id/fullname"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/nunito"

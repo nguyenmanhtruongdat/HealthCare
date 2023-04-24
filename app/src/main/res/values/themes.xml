@@ -23,7 +23,7 @@
 
     <style name="CustomDialog" parent="Theme.AppCompat.Light.Dialog">
         <item name="android:background">@drawable/dialog_background</item>
-        <item name="android:textColor">@color/dialog_text_color</item>
+        <item name="android:textColor">@color/appColor</item>
         <item name="android:divider">@color/dialog_stroke_color</item>
         <item name="android:dividerHeight">1dp</item>
         <item name="android:textAppearance">@style/DialogTextAppearance</item>
@@ -34,11 +34,11 @@
     </style>
 
     <style name="DialogButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
-        <item name="android:textColor">@color/dialog_text_color</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="DialogTextAppearance" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/dialog_text_color</item>
+        <item name="android:textColor">@color/appColor</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
     </style>

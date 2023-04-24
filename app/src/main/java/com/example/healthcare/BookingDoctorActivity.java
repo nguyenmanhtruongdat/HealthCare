@@ -12,6 +12,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.healthcare.adapter.BookingAdapter;
 import com.example.healthcare.databinding.ActivityBookingDoctorBinding;
+import com.example.healthcare.model.BookingDoctorInformation;
 import com.example.healthcare.model.SharedViewModel;
 import com.google.android.material.button.MaterialButton;
 
@@ -21,12 +22,14 @@ import java.util.List;
 public class BookingDoctorActivity extends AppCompatActivity {
     private ActivityBookingDoctorBinding binding;
     private SharedViewModel sharedViewModel;
+    private BookingDoctorInformation bookingDoctorInformation;
     MaterialButton myButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityBookingDoctorBinding.inflate(getLayoutInflater());
+        this.getViewModelStore().clear();
         requestWindowFeature(Window.FEATURE_NO_TITLE); // hide the title
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(binding.getRoot());
@@ -40,11 +43,16 @@ public class BookingDoctorActivity extends AppCompatActivity {
         Log.d("BookingDoctorActivity", "Doctor phone: " + doctorPhone);
         Log.d("BookingDoctorActivity", "Doctor major: " + doctorMajor);
         sharedViewModel = new ViewModelProvider(this).get(SharedViewModel.class);
+        bookingDoctorInformation = new BookingDoctorInformation();
+
         sharedViewModel.setDoctorName(doctorName);
         sharedViewModel.setDoctorPhone(doctorPhone);
         sharedViewModel.setDoctorMajor(doctorMajor);
         sharedViewModel.setDoctorEmail(doctorEmail);
         sharedViewModel.setImgUrl(imgUrl);
+        bookingDoctorInformation.setDoctorName(doctorName);
+        bookingDoctorInformation.setDoctorEmail(doctorEmail);
+
         setupStepView();
         setColorBtn();
 
@@ -85,7 +93,7 @@ public class BookingDoctorActivity extends AppCompatActivity {
                 } else {
                     binding.previous.setEnabled(true);
                 }
-                if (position == 3) {
+                if (position == 2) {
                     binding.next.setEnabled(false);
                 } else {
                     binding.next.setEnabled(true);
@@ -99,7 +107,7 @@ public class BookingDoctorActivity extends AppCompatActivity {
                 } else {
                     binding.previous.setEnabled(true);
                 }
-                if (position == 3) {
+                if (position == 2) {
                     binding.next.setEnabled(false);
                 } else {
                     binding.next.setEnabled(true);
@@ -123,10 +131,9 @@ public class BookingDoctorActivity extends AppCompatActivity {
 
     public void setupStepView() {
         List<String> stepList = new ArrayList<>();
-        stepList.add("Choose doctor");
+        stepList.add("Doctor");
         stepList.add("Information");
-        stepList.add("Choose time and day");
-        stepList.add("Confirm");
+        stepList.add("Time slot");
         binding.stepView.setSteps(stepList);
     }
 
