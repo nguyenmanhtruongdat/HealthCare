@@ -37,15 +37,6 @@
                 android:padding="16dp"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:spanCount="3" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/send"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:backgroundTint="@color/appColor"
-                android:text="Confirm"
-                android:textColor="@color/white" />
         </LinearLayout>
 
     </ScrollView>

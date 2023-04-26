@@ -1,6 +1,7 @@
 package com.example.healthcare;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,10 +11,12 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.healthcare.databinding.ActivityEditProfileBinding;
@@ -31,7 +34,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private ActivityEditProfileBinding binding;
     StorageReference profileImageRef;
     FirebaseStorage storage = FirebaseStorage.getInstance();
-
+    FirebaseAuth mAuth= FirebaseAuth.getInstance();
     Uri imgUrl;
 
     @Override
@@ -44,7 +47,6 @@ public class EditProfileActivity extends AppCompatActivity {
         setContentView(view);
         String uid = FirebaseAuth.getInstance().getUid();
         Users user = (Users) getIntent().getSerializableExtra("user");
-        Log.d("Check: ", "username: " + user.getUserName().toString());
         Log.d("Check: ", "fullname: " + user.getFullName().toString());
         Log.d("Check: ", "email:" + user.getEmail().toString());
         Log.d("Check: ", "phone number: " + user.getPhoneNumber().toString());
@@ -69,7 +71,6 @@ public class EditProfileActivity extends AppCompatActivity {
 
         binding.fullname.setText(user.getFullName());
         binding.fullameed.setText(user.getFullName());
-        binding.username.setText(user.getUserName());
         binding.email.setText(user.getEmail());
         binding.phoneNumber.setText(user.getPhoneNumber());
 
@@ -79,7 +80,6 @@ public class EditProfileActivity extends AppCompatActivity {
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
             String fullname = binding.fullameed.getText().toString().trim();
-            String username = binding.username.getText().toString().trim();
             String email = binding.email.getText().toString().trim();
             String phone = binding.phoneNumber.getText().toString().trim();
             SimpleDateFormat format = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
@@ -106,7 +106,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 }
             }
 
-            Users updatedUser = new Users(username, fullname, phone, email, "user");
+            Users updatedUser = new Users(fullname, phone, email, "patient");
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userId);
             databaseReference.setValue(updatedUser).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
@@ -123,6 +123,31 @@ public class EditProfileActivity extends AppCompatActivity {
         });
         binding.backBtn.setOnClickListener(view4 -> {
             finish();
+        });
+
+        binding.signOutBtn.setOnClickListener(view1 -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(EditProfileActivity.this, R.style.CustomDialog);
+            builder.setMessage("Are you sure you want to log out?");
+            builder.setCancelable(false);
+            builder.setNegativeButton("No", (dialog, id) -> {
+                // If the user cancels, close the dialog
+                dialog.cancel();
+            });
+            builder.setPositiveButton("Yes", (dialog, id) -> {
+                // If the user confirms, sign them out and redirect to login activity
+                mAuth.signOut();
+                Intent intent1 = new Intent(EditProfileActivity.this, LoginActivity.class);
+                startActivity(intent1);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                finish();
+            });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.setTitle("Log out");
+            alertDialog.show();
+            Button positiveButton = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+            positiveButton.setTextColor(getResources().getColor(R.color.dialog_button_text_color));
+            Button negativeButton = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+            negativeButton.setTextColor(getResources().getColor(R.color.dialog_button_text_color));
         });
 
 

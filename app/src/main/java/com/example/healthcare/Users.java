@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Users implements Serializable {
 
-    String userName, fullName, age, phoneNumber, email, role;
+    String fullName, age, phoneNumber, email, role;
 
     public Users() {
     }
@@ -17,29 +17,14 @@ public class Users implements Serializable {
         this.role = role;
     }
 
-    public Users(String userName, String fullName, String phoneNumber, String email, String role) {
+    public Users(String fullName, String phoneNumber, String email, String role) {
         this.fullName = fullName;
         this.email=email;
         this.phoneNumber = phoneNumber;
-        this.userName = userName;
         this.role=role;
     }
 
-    public Users(String userName, String fullName, String phoneNumber, String email) {
-        this.fullName = fullName;
-        this.role=role;
-        this.phoneNumber = phoneNumber;
-        this.userName = userName;
-        this.email = email;
-    }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 
     public String getFullName() {
         return fullName;

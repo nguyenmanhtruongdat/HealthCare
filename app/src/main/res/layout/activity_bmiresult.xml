@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/colorPrimaryDark"
     android:layout_height="match_parent"
+    android:background="#58BD9A"
     tools:context=".BMICalculator">
 
     <ImageView
@@ -37,23 +37,12 @@
             android:textStyle="bold" />
 
 
-        <TextView
-            android:id="@+id/gender_display"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/bmi_display"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
-            android:text="Gender"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/bmi_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/gender_display"
+            android:layout_below="@id/bmi_display"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
             android:text="Your bmi category is"
@@ -64,19 +53,19 @@
     </RelativeLayout>
 
     <android.widget.Button
+        android:id="@+id/re_calculate_bmi"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:id="@+id/re_calculate_bmi"
-        android:textSize="18sp"
         android:layout_below="@id/content_layout"
-        android:layout_marginTop="50dp"
-        android:text="CALCULATE YOUR BMI"
-        android:textColor="@color/white"
         android:layout_marginStart="30dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="30dp"
-        android:textStyle="bold"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/card_back_btn">
+        android:background="@drawable/card_back_btn"
+        android:text="CALCULATE YOUR BMI"
+        android:textColor="@color/appColor"
+        android:textSize="18sp"
+        android:textStyle="bold">
 
     </android.widget.Button>
 
@@ -84,9 +73,9 @@
         android:id="@+id/bannerContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
+        android:layout_marginBottom="10dp"
         android:visibility="visible" />
 
 

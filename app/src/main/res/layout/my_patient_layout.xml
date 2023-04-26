@@ -12,30 +12,30 @@
         android:padding="15dp">
 
         <com.mikhaellopez.circularimageview.CircularImageView
-            android:id="@+id/patAvatar"
+            android:id="@+id/patAvatar1"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_centerVertical="true"
             android:src="@drawable/user_atvt" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/patientName"
+            android:id="@+id/patientName1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/patAvatar"
+            android:layout_toRightOf="@id/patAvatar1"
             android:fontFamily="@font/nunito_semibold"
             android:text="Nguyen Truong Dat"
             android:textColor="@color/black"
             android:textSize="18dp" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/doctorEmaila"
+            android:id="@+id/doctorEmaila1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/patientName"
+            android:layout_below="@id/patientName1"
             android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/patAvatar"
+            android:layout_toRightOf="@id/patAvatar1"
             android:fontFamily="@font/nunito_semibold"
             android:text="datgsk1@gmail.com"
             android:textColor="@color/black"
@@ -43,60 +43,26 @@
 
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/apointmentDate"
+            android:id="@+id/apointmentDate1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/doctorEmaila"
+            android:layout_below="@id/doctorEmaila1"
             android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/patAvatar"
+            android:layout_toRightOf="@id/patAvatar1"
             android:fontFamily="@font/nunito_semibold"
             android:text="20/20/2023"
             android:textColor="@color/black"
             android:textSize="14dp" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/apointmentTime"
+            android:id="@+id/apointmentTime1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/doctorEmaila"
+            android:layout_below="@id/doctorEmaila1"
             android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/apointmentDate"
+            android:layout_toRightOf="@id/apointmentDate1"
             android:fontFamily="@font/nunito_semibold"
             android:textColor="@color/black"
             android:textSize="15dp" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/acceptBtn"
-            android:layout_width="51dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="40dp"
-            android:background="@android:color/transparent"
-            android:drawableLeft="@drawable/baseline_check_circle_24x"
-            android:elevation="0dp"
-            android:fontFamily="@font/nunito_bold"
-            android:stateListAnimator="@null"
-            android:textAllCaps="true"
-            android:textColor="@color/appColor"
-            android:textSize="15sp" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/removeBtn"
-            android:layout_width="51dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:background="@android:color/transparent"
-            android:drawableLeft="@drawable/baseline_cancel_24"
-            android:drawableTint="@color/errorColor"
-            android:fontFamily="@font/nunito_bold"
-            android:stateListAnimator="@null"
-            android:textAllCaps="true"
-            android:textColor="@color/appColor"
-            android:textSize="15sp"
-            app:cornerRadius="10dp" />
-
-
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

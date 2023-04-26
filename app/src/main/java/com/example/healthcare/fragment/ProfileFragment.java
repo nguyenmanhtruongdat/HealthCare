@@ -66,7 +66,7 @@ public class ProfileFragment extends Fragment {
 
         binding.editProfileBtn.setOnClickListener(view2 -> {
             // Get a reference to the user's data in the Firebase Realtime Database
-            Users users = new Users(binding.username.getText().toString(),binding.fullName.getText().toString(),binding.phoneNumber.getText().toString(),binding.email.getText().toString());
+            Users users = new Users(binding.fullName.getText().toString(),binding.phoneNumber.getText().toString(),binding.email.getText().toString(),"user");
 
             // Pass the user data to the EditProfileActivity
             Intent intent = new Intent(getContext(), EditProfileActivity.class);
@@ -76,6 +76,7 @@ public class ProfileFragment extends Fragment {
         });
         binding.changePasswordBtn.setOnClickListener(view3 ->{
             Intent intent = new Intent(getContext(), ChangePasswordActivity.class);
+            intent.putExtra("name", binding.fullName.getText().toString());
             startActivity(intent);
         });
 
@@ -94,12 +95,11 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 // Extract the user's profile data and fill the respective TextViews
-                String username = snapshot.child("userName").getValue(String.class);
                 String email = user.getEmail().toString();
                 String phone = snapshot.child("phoneNumber").getValue(String.class);
                 String fullName = snapshot.child("fullName").getValue(String.class);
                 binding.fullName.setText(fullName);
-                binding.username.setText(username);
+                binding.fullNameBig.setText(fullName);
                 binding.email.setText(email);
                 binding.phoneNumber.setText(phone);
             }

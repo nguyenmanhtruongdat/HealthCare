@@ -23,6 +23,12 @@ import androidx.core.view.GravityCompat;
 import com.example.healthcare.databinding.ActivityHomePatientAcitivityBinding;
 import com.example.healthcare.fragment.AboutFragment;
 import com.example.healthcare.fragment.ProfileFragment;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -41,6 +47,9 @@ public class HomePatientActivity extends AppCompatActivity implements Navigation
     private ActivityHomePatientAcitivityBinding binding;
     private DatabaseReference mDatabase;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    GoogleSignInOptions gso;
+    GoogleSignInAccount account;
+    GoogleSignInClient gsc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +72,15 @@ public class HomePatientActivity extends AppCompatActivity implements Navigation
         MenuItem profile = menu.findItem(R.id.nav_profile);
         NavigationView navigationView = findViewById(R.id.nav_view);
 
-
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        gsc = GoogleSignIn.getClient(this, gso);
+        account = GoogleSignIn.getLastSignedInAccount(this);
+        if (account != null) {
+            String personFullName = account.getDisplayName();
+            String personEmail = account.getEmail();
+            binding.email.setText(personEmail);
+            binding.fullName.setText(personFullName);
+        }
         CircularImageView nav_avtar = headerView.findViewById(R.id.nav_avatar);
         TextView nav_name = headerView.findViewById(R.id.nav_name);
         TextView nav_email = headerView.findViewById(R.id.nav_email);
@@ -95,9 +112,10 @@ public class HomePatientActivity extends AppCompatActivity implements Navigation
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (snapshot.exists()) {
                         String fullName = snapshot.child("fullName").getValue(String.class);
+                        String role = snapshot.child("role").getValue(String.class);
                         String email = user.getEmail();
                         binding.fullName.setText(fullName);
-                        binding.email.setText(email);
+                        binding.email.setText(email + " | " + role);
                         nav_name.setText(fullName);
                         nav_email.setText(email);
 
@@ -115,6 +133,19 @@ public class HomePatientActivity extends AppCompatActivity implements Navigation
             Intent intent = new Intent(HomePatientActivity.this, SearchPatActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        });
+
+        binding.appointmentRequired.setOnClickListener(view1 -> {
+            Intent intent = new Intent(HomePatientActivity.this, AppointmentRequiredActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        });
+
+        binding.bmiCal.setOnClickListener(view1 -> {
+            Intent intent = new Intent(HomePatientActivity.this, BMICalculator.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
         });
 
 //        binding.myHealth.setOnClickListener(view1 -> {
@@ -180,7 +211,7 @@ public class HomePatientActivity extends AppCompatActivity implements Navigation
                 shareIntent.setAction(Intent.ACTION_SEND);
 // Example: content://com.google.android.apps.photos.contentprovider/...
                 shareIntent.putExtra(Intent.EXTRA_STREAM, "Check out this Application");
-                shareIntent.putExtra(Intent.EXTRA_TEXT,"Your application link");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "Your application link");
                 shareIntent.setType("text/plain");
                 startActivity(Intent.createChooser(shareIntent, "Share via"));
                 //Toast.makeText(this, "share", Toast.LENGTH_SHORT).show();
@@ -205,6 +236,17 @@ public class HomePatientActivity extends AppCompatActivity implements Navigation
                 builder.setPositiveButton("Yes", (dialog, id) -> {
                     // If the user confirms, sign them out and redirect to login activity
                     mAuth.signOut();
+
+                    if (account != null) {
+                        gsc.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                finish();
+                                startActivity(new Intent(HomePatientActivity.this, LoginActivity.class));
+                            }
+                        });
+                    }
+
                     Intent intent1 = new Intent(HomePatientActivity.this, LoginActivity.class);
                     startActivity(intent1);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

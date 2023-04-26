@@ -9,31 +9,26 @@ import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.healthcare.databinding.ActivityAppointmentDetailsBinding;
+import com.example.healthcare.databinding.ActivityMyPatientDetailBinding;
 import com.example.healthcare.model.BookingDoctorInformation;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-public class AppointmentDetailsActivity extends AppCompatActivity {
+public class MyPatientDetailActivity extends AppCompatActivity {
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private ActivityAppointmentDetailsBinding binding;
+    private ActivityMyPatientDetailBinding binding;
     FirebaseStorage storage = FirebaseStorage.getInstance();
-    private  boolean shouldExit=false;
+    private boolean shouldExit=false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityAppointmentDetailsBinding.inflate(getLayoutInflater());
+        binding = ActivityMyPatientDetailBinding.inflate(getLayoutInflater());
         requestWindowFeature(Window.FEATURE_NO_TITLE); // hide the title
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(binding.getRoot());
@@ -62,45 +57,16 @@ public class AppointmentDetailsActivity extends AppCompatActivity {
                     binding.avtProfile.setImageResource(R.drawable.defaul_avatar);
                 });
 
-        binding.remove.setOnClickListener(view -> {
-            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Doctors").child(information.getDoctorEmail().split("@")[0])
-                    .child("appointments").child("appoint_" + information.getUserID());
-            ref.child("accept").setValue("reject").addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    Toast.makeText(AppointmentDetailsActivity.this, "Reject this patient", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(AppointmentDetailsActivity.this, AppointmentRequestActivity.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                }
-            });
-        });
-
-        binding.accept.setOnClickListener(view -> {
-            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Doctors").child(information.getDoctorEmail().split("@")[0])
-                    .child("appointments").child("appoint_" + information.getUserID());
-            ref.child("accept").setValue("accept").addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    Toast.makeText(AppointmentDetailsActivity.this, "Accept this patient", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(AppointmentDetailsActivity.this, AppointmentRequestActivity.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                }
-            });
-        });
 
         binding.backBtn.setOnClickListener(view -> {
-            Intent intent1 = new Intent(AppointmentDetailsActivity.this, AppointmentRequestActivity.class);
+            Intent intent1 = new Intent(MyPatientDetailActivity.this, MyPatientActivity.class);
             startActivity(intent1);
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
         });
 
-
-
         binding.signOutBtn.setOnClickListener(view1 -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(AppointmentDetailsActivity.this, R.style.CustomDialog);
+            AlertDialog.Builder builder = new AlertDialog.Builder(MyPatientDetailActivity.this, R.style.CustomDialog);
             builder.setMessage("Are you sure you want to log out?");
             builder.setCancelable(false);
             builder.setNegativeButton("No", (dialog, id) -> {
@@ -110,7 +76,7 @@ public class AppointmentDetailsActivity extends AppCompatActivity {
             builder.setPositiveButton("Yes", (dialog, id) -> {
                 // If the user confirms, sign them out and redirect to login activity
                 mAuth.signOut();
-                Intent intent1 = new Intent(AppointmentDetailsActivity.this, LoginActivity.class);
+                Intent intent1 = new Intent(MyPatientDetailActivity.this, LoginActivity.class);
                 startActivity(intent1);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();
@@ -124,11 +90,10 @@ public class AppointmentDetailsActivity extends AppCompatActivity {
             negativeButton.setTextColor(getResources().getColor(R.color.dialog_button_text_color));
         });
     }
-
     @Override
     public void onBackPressed() {
         if (shouldExit) { // shouldExit is a boolean flag to determine if the app should exit or not
-            Intent intent1 = new Intent(AppointmentDetailsActivity.this, AppointmentRequestActivity.class);
+            Intent intent1 = new Intent(MyPatientDetailActivity.this, MyPatientActivity.class);
             startActivity(intent1);
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 

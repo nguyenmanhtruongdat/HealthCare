@@ -40,6 +40,7 @@ public class DoctorHomeActivity extends AppCompatActivity implements NavigationV
     FirebaseStorage storage = FirebaseStorage.getInstance();
     private ActivityDoctorHomeBinding binding;
     private DatabaseReference mDatabase;
+
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     @Override
@@ -92,6 +93,14 @@ public class DoctorHomeActivity extends AppCompatActivity implements NavigationV
             Intent intent = new Intent(this, AppointmentRequestActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
+            finish();
+        });
+
+        binding.myPatient.setOnClickListener(view1 -> {
+            Intent intent = new Intent(this, MyPatientActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
         });
 
 
@@ -101,9 +110,10 @@ public class DoctorHomeActivity extends AppCompatActivity implements NavigationV
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (snapshot.exists()) {
                         String fullName = snapshot.child("fullName").getValue(String.class);
+                        String role = snapshot.child("role").getValue(String.class);
                         String email = user.getEmail();
                         binding.fullName.setText(fullName);
-                        binding.email.setText(email);
+                        binding.email.setText(email + " | " + role);
                         nav_name.setText(fullName);
                         nav_email.setText(email);
 
@@ -116,7 +126,6 @@ public class DoctorHomeActivity extends AppCompatActivity implements NavigationV
                 }
             });
         }
-
 
 
     }
@@ -167,7 +176,7 @@ public class DoctorHomeActivity extends AppCompatActivity implements NavigationV
                 shareIntent.setAction(Intent.ACTION_SEND);
 // Example: content://com.google.android.apps.photos.contentprovider/...
                 shareIntent.putExtra(Intent.EXTRA_STREAM, "Check out this Application");
-                shareIntent.putExtra(Intent.EXTRA_TEXT,"Your application link");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "Your application link");
                 shareIntent.setType("text/plain");
                 startActivity(Intent.createChooser(shareIntent, "Share via"));
                 //Toast.makeText(this, "share", Toast.LENGTH_SHORT).show();

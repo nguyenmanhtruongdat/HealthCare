@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/spl"
-    tools:context=".AppointmentDetailsActivity">
+    tools:context=".MyPatientDetailActivity">
 
     <LinearLayout
         android:id="@+id/ll"
@@ -21,7 +21,7 @@
             android:layout_height="30dp"
             android:layout_alignParentLeft="true"
             android:background="@drawable/baseline_arrow_back_24"
-            />
+            android:onClick="onBackPressed" />
 
         <TextView
             android:layout_width="0dp"
@@ -248,28 +248,28 @@
                 android:padding="4dp"
                 android:weightSum="2">
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/remove"
-                    android:drawableLeft="@drawable/baseline_cancel_24"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:backgroundTint="@color/errorColor"
-                    android:drawableTint="@color/white"
-                    android:gravity="center"
-                    android:text="Remove"
-                    android:textColor="@color/white"
-                    android:textSize="11dp"
-                    app:cornerRadius="5dp"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintWidth_percent="0.45"
-                    app:strokeColor="@color/errorColor"
-                    app:strokeWidth="1dp" />
+<!--                <com.google.android.material.button.MaterialButton-->
+<!--                    android:id="@+id/remove"-->
+<!--                    android:drawableLeft="@drawable/baseline_cancel_24"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="10dp"-->
+<!--                    android:layout_marginRight="10dp"-->
+<!--                    android:backgroundTint="@color/errorColor"-->
+<!--                    android:drawableTint="@color/white"-->
+<!--                    android:gravity="center"-->
+<!--                    android:text="Remove"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textSize="11dp"-->
+<!--                    app:cornerRadius="5dp"-->
+<!--                    app:layout_constraintHorizontal_bias="0.5"-->
+<!--                    app:layout_constraintWidth_percent="0.45"-->
+<!--                    app:strokeColor="@color/errorColor"-->
+<!--                    app:strokeWidth="1dp" />-->
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/accept"
-                    android:drawableLeft="@drawable/baseline_check_circle_24x"
+                    android:id="@+id/remindButton"
+                    android:drawableLeft="@drawable/baseline_notifications_active_24"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -277,7 +277,7 @@
                     android:backgroundTint="@color/appColor"
                     android:drawableTint="@color/white"
                     android:gravity="center"
-                    android:text="Accept"
+                    android:text="Remind"
                     android:textColor="@color/white"
                     android:textSize="11dp"
                     app:cornerRadius="5dp"

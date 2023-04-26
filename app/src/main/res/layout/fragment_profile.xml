@@ -18,7 +18,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
-        android:paddingTop="15dp">
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp">
 
         <com.mikhaellopez.circularimageview.CircularImageView
             android:id="@+id/avtProfile"
@@ -26,7 +27,7 @@
             android:layout_height="90dp" />
 
         <TextView
-            android:id="@+id/fullName"
+            android:id="@+id/fullNameBig"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -41,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:fontFamily="@font/nunito_semibold"
-        android:text="Username"
+        android:text="Full name"
         android:textColor="@color/appColor"
         android:textSize="16dp" />
 
@@ -51,6 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:enabled="false"
         android:textColorHint="@color/gray"
         app:boxBackgroundColor="@color/mycolor"
         app:boxBackgroundMode="outline"
@@ -58,7 +60,7 @@
         app:startIconTint="@color/appColor">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/username"
+            android:id="@+id/fullName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clickable="false"
@@ -75,6 +77,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
+
+        android:enabled="false"
         android:fontFamily="@font/nunito_semibold"
         android:text="Email"
         android:textColor="@color/appColor"
@@ -118,6 +122,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:enabled="false"
         android:textColorHint="@color/gray"
         app:boxBackgroundColor="@color/mycolor"
         app:boxBackgroundMode="outline"

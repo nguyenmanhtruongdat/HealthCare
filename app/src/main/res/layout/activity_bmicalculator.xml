@@ -4,28 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:background="#5ECAA4"
     tools:context=".BMICalculator">
+
     <RelativeLayout
         android:id="@+id/center_horizontal"
         android:layout_width="match_parent"
-        android:layout_centerHorizontal="true"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true" />
 
     <RelativeLayout
         android:id="@+id/center_vertical"
         android:layout_width="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true" />
 
     <RelativeLayout
-        android:id="@+id/male"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:id="@+id/hello"
+        android:layout_width="330dp"
+        android:layout_height="147dp"
         android:layout_above="@id/height_layout"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="35dp"
-        android:layout_toStartOf="@id/center_vertical"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="-166dp"
+        android:layout_marginBottom="37dp"
+        android:layout_toEndOf="@id/center_vertical"
         android:background="@drawable/card_back_male_female">
 
         <ImageView
@@ -34,7 +36,7 @@
             android:layout_above="@+id/textMale"
             android:layout_centerInParent="true"
             android:layout_marginBottom="20dp"
-            android:src="@drawable/male" />
+            android:src="@drawable/baseline_calculate_24" />
 
         <TextView
             android:id="@+id/textMale"
@@ -42,87 +44,52 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="10dp"
-            android:text="Male"
+            android:text="Calculator"
             android:textAlignment="center"
             android:textColor="@color/dark_green"
-            android:textSize="20sp"
+            android:textSize="30sp"
             android:textStyle="bold" />
 
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/female"
-        android:layout_width="150dp"
-        android:layout_toEndOf="@id/center_vertical"
-        android:layout_height="150dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/card_back_male_female"
-        android:layout_above="@id/height_layout"
-        android:layout_marginBottom="35dp">
-
-        <ImageView
-            android:layout_width="170px"
-            android:layout_height="170px"
-            android:layout_above="@+id/textFemale"
-            android:layout_centerInParent="true"
-            android:layout_marginBottom="20dp"
-            android:src="@drawable/female" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Female"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:id="@+id/textFemale"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="10dp"
-            android:textAlignment="center"
-            android:textColor="@color/dark_green"
-            />
-
-
-
-    </RelativeLayout>
-
-
 
 
 
     <RelativeLayout
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="470dp"
-        android:background="@drawable/card_back"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp"
         android:id="@+id/weight"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_below="@id/height_layout"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="470dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
         android:layout_toStartOf="@id/center_vertical"
-        android:layout_below="@id/height_layout">
+        android:background="@drawable/card_back">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/dark_green"
-            android:text="Weight"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textAlignment="center"
             android:id="@+id/text_weight"
-            android:layout_marginTop="15dp"
-            />
-        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/dark_green"
-            android:text="50"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:layout_below="@id/text_weight"
+            android:layout_marginTop="15dp"
+            android:text="Weight"
             android:textAlignment="center"
+            android:textColor="@color/dark_green"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
             android:id="@+id/current_weight"
-            android:layout_marginTop="25dp"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_weight"
+            android:layout_marginTop="25dp"
+            android:text="50"
+            android:textAlignment="center"
+            android:textColor="@color/dark_green"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -140,13 +107,14 @@
 
 
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="10dp"
-            android:layout_alignParentEnd="true"
             android:background="@drawable/card_back_plus_minus">
 
             <ImageView
@@ -161,39 +129,39 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/gae"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="470dp"
-        android:background="@drawable/card_back"
-        android:layout_marginEnd="20dp"
+        android:layout_below="@id/height_layout"
         android:layout_marginStart="20dp"
-        android:id="@+id/gae"
+        android:layout_marginTop="470dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
         android:layout_toEndOf="@id/center_vertical"
-        android:layout_below="@id/height_layout">
+        android:background="@drawable/card_back">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/dark_green"
-            android:text="Age"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textAlignment="center"
             android:id="@+id/text_age"
-            android:layout_marginTop="15dp"
-            />
-        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/dark_green"
-            android:text="20"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:layout_below="@id/text_age"
+            android:layout_marginTop="15dp"
+            android:text="Age"
             android:textAlignment="center"
+            android:textColor="@color/dark_green"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
             android:id="@+id/current_age"
-            android:layout_marginTop="25dp"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_age"
+            android:layout_marginTop="25dp"
+            android:text="20"
+            android:textAlignment="center"
+            android:textColor="@color/dark_green"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -211,20 +179,21 @@
 
 
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="10dp"
-            android:layout_alignParentEnd="true"
             android:background="@drawable/card_back_plus_minus">
 
             <ImageView
+                android:id="@+id/increment_age"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/add"
-                android:id="@+id/increment_age"/>
+                android:src="@drawable/add" />
 
 
         </RelativeLayout>
@@ -300,12 +269,11 @@
         android:layout_marginBottom="20dp"
         android:background="@drawable/card_back_btn"
         android:text="CALCULATE YOUR BMI"
-        android:textColor="@color/white"
+        android:textColor="@color/appColor"
         android:textSize="18sp"
         android:textStyle="bold">
 
     </android.widget.Button>
-
 
 
 </RelativeLayout>
