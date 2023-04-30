@@ -14,6 +14,9 @@
         android:theme="@style/Theme.HealthCare"
         tools:targetApi="31">
         <activity
+            android:name=".AppointmentRequiredDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".MyPatientDetailActivity"
             android:exported="false" />
         <activity
@@ -62,7 +65,11 @@
             android:exported="false" />
         <activity
             android:name=".SearchPatActivity"
-            android:exported="false" />
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ResetPasswordActivity"
             android:exported="false" />
@@ -98,6 +105,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service
             android:name=".AppointmentReminderService"
             android:exported="false">
@@ -105,7 +113,6 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
         <service
             android:name=".MyFirebaseInstanceIDService"
             android:exported="false">

@@ -1,11 +1,14 @@
 package com.example.healthcare;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -50,30 +53,30 @@ public class AppointmentRequestActivity extends AppCompatActivity implements App
 
         });
 
-//        binding.signOutBtn.setOnClickListener(view1 -> {
-//            AlertDialog.Builder builder = new AlertDialog.Builder(AppointmentRequestActivity.this, R.style.CustomDialog);
-//            builder.setMessage("Are you sure you want to log out?");
-//            builder.setCancelable(false);
-//            builder.setNegativeButton("No", (dialog, id) -> {
-//                // If the user cancels, close the dialog
-//                dialog.cancel();
-//            });
-//            builder.setPositiveButton("Yes", (dialog, id) -> {
-//                // If the user confirms, sign them out and redirect to login activity
-//                mAuth.signOut();
-//                Intent intent1 = new Intent(AppointmentRequestActivity.this, LoginActivity.class);
-//                startActivity(intent1);
-//                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-//                finish();
-//            });
-//            AlertDialog alertDialog = builder.create();
-//            alertDialog.setTitle("Log out");
-//            alertDialog.show();
-//            Button positiveButton = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
-//            positiveButton.setTextColor(getResources().getColor(R.color.dialog_button_text_color));
-//            Button negativeButton = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
-//            negativeButton.setTextColor(getResources().getColor(R.color.dialog_button_text_color));
-//        });
+        binding.signOutBtn.setOnClickListener(view1 -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(AppointmentRequestActivity.this, R.style.CustomDialog);
+            builder.setMessage("Are you sure you want to log out?");
+            builder.setCancelable(false);
+            builder.setNegativeButton("No", (dialog, id) -> {
+                // If the user cancels, close the dialog
+                dialog.cancel();
+            });
+            builder.setPositiveButton("Yes", (dialog, id) -> {
+                // If the user confirms, sign them out and redirect to login activity
+                mAuth.signOut();
+                Intent intent1 = new Intent(AppointmentRequestActivity.this, LoginActivity.class);
+                startActivity(intent1);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                finish();
+            });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.setTitle("Log out");
+            alertDialog.show();
+            Button positiveButton = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+            positiveButton.setTextColor(getResources().getColor(R.color.dialog_button_text_color));
+            Button negativeButton = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+            negativeButton.setTextColor(getResources().getColor(R.color.dialog_button_text_color));
+        });
 
 
     }
