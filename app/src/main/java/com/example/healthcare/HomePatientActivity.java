@@ -140,7 +140,11 @@ public class HomePatientActivity extends AppCompatActivity implements Navigation
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         });
-
+        binding.appointmentToday.setOnClickListener(view1 -> {
+            Intent intent = new Intent(HomePatientActivity.this, AppointmentTodayActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        });
         binding.bmiCal.setOnClickListener(view1 -> {
             Intent intent = new Intent(HomePatientActivity.this, BMICalculator.class);
             startActivity(intent);
