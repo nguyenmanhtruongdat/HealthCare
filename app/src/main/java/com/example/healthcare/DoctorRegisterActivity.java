@@ -27,10 +27,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -311,14 +308,14 @@ public class DoctorRegisterActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
                                     // Doctor added successfully, add availability for the doctor
-                                    DatabaseReference availabilityRef = FirebaseDatabase.getInstance().getReference("Doctors").child(doctorEmail).child("availability");
-                                    Calendar calendar = Calendar.getInstance();
-                                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-                                    for (int i = 0; i < 7; i++) {
-                                        calendar.add(Calendar.DATE, 1);
-                                        String date = dateFormat.format(calendar.getTime());
-                                        availabilityRef.child(date).setValue(getDefaultAvailability());
-                                    }
+//                                    DatabaseReference availabilityRef = FirebaseDatabase.getInstance().getReference("Doctors").child(doctorEmail).child("availability");
+//                                    Calendar calendar = Calendar.getInstance();
+//                                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+//                                    for (int i = 0; i < 7; i++) {
+//                                        calendar.add(Calendar.DATE, 1);
+//                                        String date = dateFormat.format(calendar.getTime());
+//                                        availabilityRef.child(date).setValue(getDefaultAvailability());
+//                                    }
                                     Toast.makeText(DoctorRegisterActivity.this, "Successfully Updated", Toast.LENGTH_SHORT).show();
                                 } else {
                                     Toast.makeText(DoctorRegisterActivity.this, "Updated Failed", Toast.LENGTH_SHORT).show();

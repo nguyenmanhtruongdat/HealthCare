@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/spl"
+    android:orientation="vertical"
     tools:context=".MyPatientDetailActivity">
 
     <LinearLayout
@@ -238,55 +238,55 @@
                     android:textColor="@color/gray" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <LinearLayout
-                android:id="@+id/layoutBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal"
-                android:padding="4dp"
-                android:weightSum="2">
+            <!--            <LinearLayout-->
+            <!--                android:id="@+id/layoutBtn"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_alignParentBottom="true"-->
+            <!--                android:gravity="center_horizontal"-->
+            <!--                android:orientation="horizontal"-->
+            <!--                android:padding="4dp"-->
+            <!--                android:weightSum="2">-->
 
-<!--                <com.google.android.material.button.MaterialButton-->
-<!--                    android:id="@+id/remove"-->
-<!--                    android:drawableLeft="@drawable/baseline_cancel_24"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginLeft="10dp"-->
-<!--                    android:layout_marginRight="10dp"-->
-<!--                    android:backgroundTint="@color/errorColor"-->
-<!--                    android:drawableTint="@color/white"-->
-<!--                    android:gravity="center"-->
-<!--                    android:text="Remove"-->
-<!--                    android:textColor="@color/white"-->
-<!--                    android:textSize="11dp"-->
-<!--                    app:cornerRadius="5dp"-->
-<!--                    app:layout_constraintHorizontal_bias="0.5"-->
-<!--                    app:layout_constraintWidth_percent="0.45"-->
-<!--                    app:strokeColor="@color/errorColor"-->
-<!--                    app:strokeWidth="1dp" />-->
+            <!--                <com.google.android.material.button.MaterialButton-->
+            <!--                    android:id="@+id/remove"-->
+            <!--                    android:drawableLeft="@drawable/baseline_cancel_24"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginLeft="10dp"-->
+            <!--                    android:layout_marginRight="10dp"-->
+            <!--                    android:backgroundTint="@color/errorColor"-->
+            <!--                    android:drawableTint="@color/white"-->
+            <!--                    android:gravity="center"-->
+            <!--                    android:text="Remove"-->
+            <!--                    android:textColor="@color/white"-->
+            <!--                    android:textSize="11dp"-->
+            <!--                    app:cornerRadius="5dp"-->
+            <!--                    app:layout_constraintHorizontal_bias="0.5"-->
+            <!--                    app:layout_constraintWidth_percent="0.45"-->
+            <!--                    app:strokeColor="@color/errorColor"-->
+            <!--                    app:strokeWidth="1dp" />-->
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/remindButton"
-                    android:drawableLeft="@drawable/baseline_notifications_active_24"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:backgroundTint="@color/appColor"
-                    android:drawableTint="@color/white"
-                    android:gravity="center"
-                    android:text="Remind"
-                    android:textColor="@color/white"
-                    android:textSize="11dp"
-                    app:cornerRadius="5dp"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintWidth_percent="0.45"
-                    app:strokeColor="@color/appColor"
-                    app:strokeWidth="1dp" />
+            <!--                <com.google.android.material.button.MaterialButton-->
+            <!--                    android:id="@+id/remindButton"-->
+            <!--                    android:drawableLeft="@drawable/baseline_notifications_active_24"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginLeft="10dp"-->
+            <!--                    android:layout_marginRight="10dp"-->
+            <!--                    android:backgroundTint="@color/appColor"-->
+            <!--                    android:drawableTint="@color/white"-->
+            <!--                    android:gravity="center"-->
+            <!--                    android:text="Remind"-->
+            <!--                    android:textColor="@color/white"-->
+            <!--                    android:textSize="11dp"-->
+            <!--                    app:cornerRadius="5dp"-->
+            <!--                    app:layout_constraintHorizontal_bias="0.5"-->
+            <!--                    app:layout_constraintWidth_percent="0.45"-->
+            <!--                    app:strokeColor="@color/appColor"-->
+            <!--                    app:strokeWidth="1dp" />-->
 
-            </LinearLayout>
+            <!--            </LinearLayout>-->
         </LinearLayout>
 
 

@@ -34,6 +34,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+
 public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding binding;
     private FirebaseAuth mAuth;
@@ -88,10 +94,22 @@ public class LoginActivity extends AppCompatActivity {
                                             if (dataSnapshot.exists() && dataSnapshot.child("role").getValue() != null) {
                                                 String role = dataSnapshot.child("role").getValue().toString();
                                                 if (role.equals("doctor")) {
+
+
                                                     Intent intent = new Intent(LoginActivity.this, DoctorHomeActivity.class);
                                                     startActivity(intent);
                                                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                                     finish();
+
+                                                    DatabaseReference availabilityRef = FirebaseDatabase.getInstance().getReference("Doctors").child(doctorEmail).child("availability");
+                                                    Calendar calendar = Calendar.getInstance();
+                                                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+                                                    for (int i = 0; i < 7; i++) {
+                                                        calendar.add(Calendar.DATE, 1);
+                                                        String date = dateFormat.format(calendar.getTime());
+                                                        availabilityRef.child(date).setValue(getDefaultAvailability());
+                                                    }
+
                                                 } else if (role.equals("patient")) {
                                                     Intent intent = new Intent(LoginActivity.this, HomePatientActivity.class);
                                                     startActivity(intent);
@@ -139,9 +157,9 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-        binding.googleLogin.setOnClickListener(view1 -> {
-            signInGoogle();
-        });
+//        binding.googleLogin.setOnClickListener(view1 -> {
+//            signInGoogle();
+//        });
 
         binding.register.setOnClickListener(view2 -> startActivity(
                 new Intent(LoginActivity.this, RegisterActivity.class)));
@@ -212,5 +230,20 @@ public class LoginActivity extends AppCompatActivity {
     private void navigateToHome() {
         Intent intent = new Intent(this, HomePatientActivity.class);
         startActivity(intent);
+    }
+
+    private Map<String, Map<String, Boolean>> getDefaultAvailability() {
+        // Set the default availability for a day as available for all time slots
+        Map<String, Map<String, Boolean>> availability = new HashMap<>();
+        for (int i = 7; i < 17; i++) {
+            Map<String, Boolean> timeSlot1 = new HashMap<>();
+            timeSlot1.put("available", true);
+            availability.put(i + ":00-" + i + ":30", timeSlot1);
+
+            Map<String, Boolean> timeSlot2 = new HashMap<>();
+            timeSlot2.put("available", true);
+            availability.put(i + ":30-" + (i + 1) + ":00", timeSlot2);
+        }
+        return availability;
     }
 }

@@ -110,7 +110,13 @@ public class DoctorHomeActivity extends AppCompatActivity implements NavigationV
         binding.avtProfile.setOnClickListener(view1 -> {
             binding.drawerLayout.openDrawer(GravityCompat.END);
         });
+        binding.post.setOnClickListener(view1 -> {
+            Intent intent = new Intent(this,  PostHomeActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
 
+        });
         binding.appointmentRequest.setOnClickListener(view1 -> {
             Intent intent = new Intent(this, AppointmentRequestActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

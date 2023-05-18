@@ -127,6 +127,7 @@ public class HomePatientActivity extends AppCompatActivity implements Navigation
         });
 
 
+
         if (user != null) {
             FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -149,6 +150,11 @@ public class HomePatientActivity extends AppCompatActivity implements Navigation
                 }
             });
         }
+        binding.newsPost.setOnClickListener(view1 -> {
+            Intent intent = new Intent(HomePatientActivity.this, NewsPostActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        });
 
         binding.search.setOnClickListener(view3 -> {
             Intent intent = new Intent(HomePatientActivity.this, SearchPatActivity.class);

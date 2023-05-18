@@ -10,8 +10,18 @@ public class BookingDoctorInformation implements Serializable {
     private String doctorName;
     private String doctorEmail;
     private String doctorMajor;
+    private String bookingID;
     private String date;
     private String timeSlot;
+
+    public String getBookingID() {
+        return bookingID;
+    }
+
+    public void setBookingID(String bookingID) {
+        this.bookingID = bookingID;
+    }
+
     private String accept;
     private String userID;
 
@@ -26,6 +36,21 @@ public class BookingDoctorInformation implements Serializable {
 
     public void setUserID(String userID) {
         this.userID = userID;
+    }
+
+    public BookingDoctorInformation(String userName, String userEmail, String userPhone, String dateOfBirth, String doctorName, String doctorEmail, String doctorMajor, String date, String timeSlot, String accept, String userID, String bookingID) {
+        this.userName = userName;
+        this.userEmail = userEmail;
+        this.userPhone = userPhone;
+        this.dateOfBirth = dateOfBirth;
+        this.doctorName = doctorName;
+        this.doctorEmail = doctorEmail;
+        this.doctorMajor = doctorMajor;
+        this.date = date;
+        this.timeSlot = timeSlot;
+        this.accept = accept;
+        this.userID=userID;
+        this.bookingID = bookingID;
     }
 
     public BookingDoctorInformation(String userName, String userEmail, String userPhone, String dateOfBirth, String doctorName, String doctorEmail, String doctorMajor, String date, String timeSlot, String accept, String userID) {

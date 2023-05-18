@@ -133,6 +133,16 @@
                         android:clickable="true"
                         android:src="@drawable/bmi" />
 
+                    <ImageView
+                        android:id="@+id/news_post"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/my_health"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="16dp"
+                        android:clickable="true"
+                        android:src="@drawable/hot_news" />
+
 
                 </LinearLayout>
 
