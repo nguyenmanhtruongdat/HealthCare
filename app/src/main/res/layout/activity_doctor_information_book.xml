@@ -71,12 +71,12 @@
             android:textSize="20dp"
             android:textStyle="bold" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@color/appColor" />
+<!--        <View-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:layout_marginBottom="10dp"-->
+<!--            android:background="@color/appColor" />-->
     </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -191,21 +191,21 @@
             app:strokeColor="@color/appColor"
             app:strokeWidth="1dp" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/chat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:drawableLeft="@drawable/baseline_message_24"
-            android:drawableTint="@color/white"
-            android:text="CHAT"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/appColor"
-            android:textSize="12dp"
-            app:cornerRadius="10dp"
-            app:strokeColor="@color/appColor"
-            app:strokeWidth="1dp" />
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/chat"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginLeft="10dp"-->
+<!--            android:layout_marginRight="10dp"-->
+<!--            android:drawableLeft="@drawable/baseline_message_24"-->
+<!--            android:drawableTint="@color/white"-->
+<!--            android:text="CHAT"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:backgroundTint="@color/appColor"-->
+<!--            android:textSize="12dp"-->
+<!--            app:cornerRadius="10dp"-->
+<!--            app:strokeColor="@color/appColor"-->
+<!--            app:strokeWidth="1dp" />-->
 
     </LinearLayout>
 

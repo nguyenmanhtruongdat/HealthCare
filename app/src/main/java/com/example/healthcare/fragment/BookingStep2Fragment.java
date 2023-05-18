@@ -22,8 +22,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
 
@@ -105,15 +103,9 @@ public class BookingStep2Fragment extends Fragment {
             String userEmail = binding.email.getText().toString();
             String userName = binding.fullname.getText().toString();
             String userPhone = binding.phoneNumber.getText().toString();
-            LocalDateTime currentDateTime = LocalDateTime.now();
 
-            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-            String date = currentDateTime.format(dateFormatter);
-            String time = currentDateTime.format(timeFormatter);
 
-// Generate the post identifier
-            String bookingID = "booking" + date.replace("/", "") + time.replace(":", "");
+
             BookingDoctorInformation information = new BookingDoctorInformation(userName, userEmail, userPhone, dob, drName, email, drMajor, "", "",accept, userId);
             information.setUserName(binding.fullname.getText().toString());
             information.setUserEmail(binding.email.getText().toString());
@@ -130,7 +122,7 @@ public class BookingStep2Fragment extends Fragment {
 
 
 
-            doctorRef.child(drEmail).child("appointments").child("appoint"+FirebaseAuth.getInstance().getUid()).setValue(information).addOnCompleteListener(task -> {
+            doctorRef.child(drEmail).child("appointments").child("appoint_"+FirebaseAuth.getInstance().getUid()).setValue(information).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     Log.d("appointments", "Add appointment");
 

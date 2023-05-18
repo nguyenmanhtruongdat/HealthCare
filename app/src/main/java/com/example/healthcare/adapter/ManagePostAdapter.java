@@ -102,7 +102,7 @@ public class ManagePostAdapter extends FirebaseRecyclerAdapter<Post, ManagePostA
         viewHolder.del.setOnClickListener(view -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.CustomDialog);
             builder.setTitle("Confirm booking");
-            builder.setMessage("Do you want to book this time slot?");
+            builder.setMessage("Do you want to delete this post?");
 
             builder.setPositiveButton("Yes", (dialogInterface, i) -> {
                 DatabaseReference postRef = FirebaseDatabase.getInstance().getReference().child("Post").child(model.getId());
