@@ -7,6 +7,8 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -33,11 +35,18 @@ public class EditPostActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        binding=ActivityEditPostBinding.inflate(getLayoutInflater());
+        binding = ActivityEditPostBinding.inflate(getLayoutInflater());
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE); // hide the title
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(binding.getRoot());
 
-
+        binding.backBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(this, ManagePostActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
+        });
         Intent intent = getIntent();
         if (intent != null) {
             post = (Post) intent.getSerializableExtra("post");
@@ -100,14 +109,16 @@ public class EditPostActivity extends AppCompatActivity {
             databaseReference.setValue(post1).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     Toast.makeText(EditPostActivity.this, "Post updated successfully", Toast.LENGTH_SHORT).show();
+                    finish();
                 } else {
                     Toast.makeText(EditPostActivity.this, "Failed to update post", Toast.LENGTH_SHORT).show();
-
+                    finish();
                 }
             });
         });
 
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -116,6 +127,7 @@ public class EditPostActivity extends AppCompatActivity {
             binding.image.setImageURI(imgUrl);
         }
     }
+
     private void selectImage() {
         Intent intent = new Intent();
         intent.setType("image/*");

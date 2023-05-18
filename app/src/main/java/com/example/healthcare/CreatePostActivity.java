@@ -30,6 +30,8 @@ import java.time.format.DateTimeFormatter;
 public class CreatePostActivity extends AppCompatActivity {
     private ActivityCreatePostBinding binding;
     StorageReference postImageRef;
+    private boolean shouldExit=false;
+
     FirebaseStorage storage = FirebaseStorage.getInstance();
     ProgressDialog progressDialog;
     Uri imgUrl;
@@ -43,8 +45,6 @@ public class CreatePostActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         binding = ActivityCreatePostBinding.inflate(getLayoutInflater());
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE); // hide the title
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         requestWindowFeature(Window.FEATURE_NO_TITLE); // hide the title
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(binding.getRoot());
@@ -66,7 +66,7 @@ public class CreatePostActivity extends AppCompatActivity {
 // Generate the post identifier
         String postIdentifier = "post" + date.replace("/", "") + time.replace(":", "");
         binding.backBtn.setOnClickListener(view -> {
-            Intent intent = new Intent(this,  PostHomeActivity.class);
+            Intent intent = new Intent(this, PostHomeActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
@@ -116,6 +116,20 @@ public class CreatePostActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (shouldExit) { // shouldExit is a boolean flag to determine if the app should exit or not
+            Intent intent1 = new Intent(CreatePostActivity.this, PostHomeActivity.class);
+            startActivity(intent1);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+        } else {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            startActivity(intent);
+        }
     }
 
     private void selectImage() {

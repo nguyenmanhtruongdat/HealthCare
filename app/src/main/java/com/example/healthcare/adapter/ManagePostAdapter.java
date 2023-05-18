@@ -1,16 +1,19 @@
 package com.example.healthcare.adapter;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.healthcare.EditPostActivity;
@@ -101,7 +104,7 @@ public class ManagePostAdapter extends FirebaseRecyclerAdapter<Post, ManagePostA
 
         viewHolder.del.setOnClickListener(view -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.CustomDialog);
-            builder.setTitle("Confirm booking");
+            builder.setTitle("Confirm delete");
             builder.setMessage("Do you want to delete this post?");
 
             builder.setPositiveButton("Yes", (dialogInterface, i) -> {
@@ -122,7 +125,17 @@ public class ManagePostAdapter extends FirebaseRecyclerAdapter<Post, ManagePostA
             });
 
             builder.setNegativeButton("Cancel", (dialogInterface, i) -> dialogInterface.dismiss());
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            int buttonYesColor = ContextCompat.getColor(activity, R.color.appColor);
+            int buttonNoColor = ContextCompat.getColor(activity, R.color.appColor);
 
+// Set the button text color
+
+            Button yesButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+            Button noButton = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+            yesButton.setTextColor(buttonYesColor);
+            noButton.setTextColor(buttonYesColor);
 
         });
 
