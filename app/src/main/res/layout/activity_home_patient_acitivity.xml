@@ -112,22 +112,22 @@
                         android:clickable="true"
                         android:src="@drawable/appointment_today" />
 
-                    <ImageView
-                        android:id="@+id/my_health"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/appointment_required"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="16dp"
-                        android:clickable="true"
-                        android:src="@drawable/myhealth" />
+<!--                    <ImageView-->
+<!--                        android:id="@+id/my_health"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_below="@id/appointment_required"-->
+<!--                        android:layout_centerHorizontal="true"-->
+<!--                        android:layout_marginBottom="16dp"-->
+<!--                        android:clickable="true"-->
+<!--                        android:src="@drawable/myhealth" />-->
 
 
                     <ImageView
                         android:id="@+id/bmi_cal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/my_health"
+                        android:layout_below="@id/appointment_today"
                         android:layout_centerHorizontal="true"
                         android:layout_marginBottom="16dp"
                         android:clickable="true"
@@ -137,7 +137,7 @@
                         android:id="@+id/news_post"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/my_health"
+                        android:layout_below="@id/bmi_cal"
                         android:layout_centerHorizontal="true"
                         android:layout_marginBottom="16dp"
                         android:clickable="true"

@@ -91,18 +91,9 @@ public class NewsPostActivity extends AppCompatActivity implements ViewPostAdapt
         mainAdapter.stopListening();
 
     }
-    @Override
     public void onBackPressed() {
-        if (shouldExit) { // shouldExit is a boolean flag to determine if the app should exit or not
-            Intent intent1 = new Intent(NewsPostActivity.this, DoctorHomeActivity.class);
-            startActivity(intent1);
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-
-        } else {
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.addCategory(Intent.CATEGORY_HOME);
-            startActivity(intent);
-        }
+        super.onBackPressed();
+        finish();
     }
 
 
@@ -115,6 +106,7 @@ public class NewsPostActivity extends AppCompatActivity implements ViewPostAdapt
             // handle the result here, if any
         }
     }
+
 
 
     @Override
