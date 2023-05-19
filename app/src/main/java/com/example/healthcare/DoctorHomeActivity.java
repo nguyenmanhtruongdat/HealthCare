@@ -22,7 +22,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 
 import com.example.healthcare.databinding.ActivityDoctorHomeBinding;
-import com.example.healthcare.fragment.AboutFragment;
 import com.example.healthcare.fragment.DoctorProfileFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -209,14 +208,6 @@ public class DoctorHomeActivity extends AppCompatActivity implements NavigationV
                 startActivity(Intent.createChooser(shareIntent, "Share via"));
                 //Toast.makeText(this, "share", Toast.LENGTH_SHORT).show();
                 //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ShareFragment()).commit();
-                break;
-            case R.id.nav_about:
-                binding.mainLayout.removeAllViews();
-
-                //Toast.makeText(this, "about", Toast.LENGTH_SHORT).show();
-//                fragment_container.removeAllViews();
-                getSupportFragmentManager().popBackStack();
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AboutFragment()).commit();
                 break;
             case R.id.nav_logout:
                 AlertDialog.Builder builder = new AlertDialog.Builder(DoctorHomeActivity.this, R.style.CustomDialog);
