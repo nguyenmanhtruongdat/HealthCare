@@ -109,10 +109,9 @@ public class EditPostActivity extends AppCompatActivity {
             databaseReference.setValue(post1).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     Toast.makeText(EditPostActivity.this, "Post updated successfully", Toast.LENGTH_SHORT).show();
-                    finish();
+
                 } else {
                     Toast.makeText(EditPostActivity.this, "Failed to update post", Toast.LENGTH_SHORT).show();
-                    finish();
                 }
             });
         });
