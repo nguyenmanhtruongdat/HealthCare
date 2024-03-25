@@ -1,6 +1,5 @@
 # Android Application using Java and Firebase
 
-
 # Image
 
 ![Screenshot_20230502_153333](https://github.com/nguyenmanhtruongdat/HealthCare/assets/94544483/d7e63cc7-d457-43c9-9c2e-392ddd96a4f0)
